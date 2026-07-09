@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Frontend\DashboardController;
+use App\Http\Controllers\Frontend\PasswordController;
 use App\Http\Controllers\Frontend\ProfileController;
 use App\Http\Controllers\Frontend\HomeController;
 use Illuminate\Support\Facades\Route;
@@ -45,6 +46,7 @@ Route::group([
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::put('profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::put('password-update', [PasswordController::class, 'update'])->name('password.update');
 
 });
 

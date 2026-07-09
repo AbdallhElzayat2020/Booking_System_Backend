@@ -119,7 +119,7 @@
                         </div>
                         <div class="my_listing list_mar">
                             <h4>change password</h4>
-                            <form action="" method="post">
+                            <form action="{{ route('user.password.update') }}" method="post">
                                 @csrf
                                 @method('PUT')
                                 <div class="row">

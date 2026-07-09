@@ -1,0 +1,20 @@
+
+- -✅update user password
+
+- ✅show admin profile
+- ✅update admin Profile
+---------------------------------
+- ✅ admin dashboard complete layouts
+---------------------------------
+- ✅Forget Password for User View
+- forget password for admin
+---------------------------------
+
+
+
+-✅ show user profile
+-✅ update user Profile
+
+
+
+
