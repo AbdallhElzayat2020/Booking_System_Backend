@@ -53,9 +53,9 @@
                         <li>
                             <p><i class="far fa-map-marker-alt"></i> San Francisco City Hall, San Francisco</p>
                         </li>
-                        <li><a href="#"><a href="mailto:example@gmail.com"><i class="fal fa-envelope"></i>
+                        <li><a href="mailto:example@gmail.com"><i class="fal fa-envelope"></i>
                                     example@gmail.com</a></li>
-                        <li><a href="#"><a href="callto:+6985224411026"><i class="fal fa-phone-alt"></i>
+                        <li><a href="callto:+6985224411026"><i class="fal fa-phone-alt"></i>
                                     +6985224411026</a></li>
                     </ul>
                 </div>
