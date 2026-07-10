@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\HeroController;
 use App\Http\Controllers\Admin\PasswordController;
 use App\Http\Controllers\Admin\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -20,7 +21,7 @@ Route::group([
 
 
     Route::get('forget-password', [PasswordController::class, 'showForm'])
-        ->name('profile.forget-password.index');
+        ->name('forget-password.index');
 
 });
 
@@ -47,6 +48,13 @@ Route::group(['prefix' => 'admin',
             ->name('profile.change-password');
 
 
+        /*  --- Hero Routes --- */
+
+        Route::get('hero-section', [HeroController::class, 'index'])
+            ->name('hero.index');
+
+        Route::put('hero-section', [HeroController::class, 'update'])
+            ->name('hero.update');
 
 
     });
