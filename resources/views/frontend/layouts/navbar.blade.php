@@ -6,9 +6,9 @@
         <div class="row">
             <div class="col-xl-6 col-md-7 d-none d-md-block">
                 <ul class="wsus__topbar_left">
-                    <li><a href="mailto:support@websolutionus.com"><i class="fal fa-envelope"></i>
-                            support@websolutionus.com</a></li>
-                    <li><a href="callto:+6958474522655"><i class="fal fa-phone-alt"></i>+6958474522655</a></li>
+                    <li><a href="mailto:abdallhelzayat194@gmai.com"><i class="fal fa-envelope"></i>
+                            abdallhelzayat194@gmai.com</a></li>
+                    <li><a href="callto:+201019386883"><i class="fal fa-phone-alt"></i>+201019386883</a></li>
                 </ul>
             </div>
             <div class="col-xl-6 col-md-5">
@@ -29,8 +29,8 @@
 ===========================-->
 <nav class="navbar navbar-expand-lg main_menu">
     <div class="container">
-        <a class="navbar-brand" href="index.html">
-            <img src="../../../../public/assets/client/images/logo.png" alt="DB.Card">
+        <a class="navbar-brand" href="{{ route('home') }}">
+            <img src="{{asset('assets/client/images/logo.png')}}" alt="DB.Card">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -40,7 +40,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav m-auto">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                    <a class="nav-link active" aria-current="page" href="{{ route('home') }}">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="about.html">about</a>

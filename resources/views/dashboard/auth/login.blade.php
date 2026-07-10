@@ -23,7 +23,7 @@
                     class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
 
                     <div class="login-brand">
-                        <img src="{{ asset('assets/admin/assets/img/stisla-fill.svg') }}" alt="logo"
+                        <img src="{{ asset('assets/admin/img/stisla-fill.svg') }}" alt="logo"
                              width="100" class="shadow-light rounded-circle">
                     </div>
 
@@ -57,7 +57,7 @@
                                         <label>Password</label>
 
                                         <div class="float-right">
-                                            <a href="" class="text-small">
+                                            <a href="{{ route('password.request') }}" class="text-small">
                                                 Forgot Password?
                                             </a>
                                         </div>
