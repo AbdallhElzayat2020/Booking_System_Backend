@@ -78,7 +78,7 @@
                                                 Remember Me
                                             </label>
                                         </div>
-                                        <a href="{{ route('admin.forget-password.index') }}">Forget Password ?</a>
+                                        <a href="{{ route('password.request') }}">Forget Password ?</a>
                                     </div>
                                 </div>
 

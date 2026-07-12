@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\HeroController;
 use App\Http\Controllers\Admin\PasswordController;
 use App\Http\Controllers\Admin\ProfileController;
@@ -56,7 +57,8 @@ Route::group(['prefix' => 'admin',
         Route::put('hero-section', [HeroController::class, 'update'])
             ->name('hero.update');
 
-
+        /*  --- Categories Routes --- */
+        Route::resource('categories', CategoryController::class);
     });
 
 

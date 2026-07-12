@@ -25,4 +25,20 @@ trait FileHandler
 
         return $fileName;
     }
+
+    public function deleteFile(string $filename, string $disk): bool
+    {
+
+        if (!$filename) {
+            return false;
+        }
+
+        if (Storage::disk($disk)->exists($filename)) {
+            return Storage::disk($disk)->delete($filename);
+        }
+
+        return false;
+    }
+
+
 }

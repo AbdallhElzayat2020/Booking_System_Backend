@@ -58,6 +58,13 @@ return [
             'visibility' => 'public',
             'throw' => false,
         ],
+        'categories' => [
+            'driver' => 'local',
+            'root' => public_path('categories'),
+            'url' => env('APP_URL') . '/categories',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
         'uploads' => [
             'driver' => 'local',
             'root' => public_path('uploads'),
