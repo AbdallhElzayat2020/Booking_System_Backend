@@ -13,3 +13,9 @@
 
 {{-- Upload Preview --}}
 <script src="{{asset('assets/admin/modules/upload-preview/assets/js/jquery.uploadPreview.min.js')}}"></script>
+
+{{-- Data Tables --}}
+<script src="//cdn.datatables.net/2.3.8/js/dataTables.min.js"></script>
+
+
+@stack('js')

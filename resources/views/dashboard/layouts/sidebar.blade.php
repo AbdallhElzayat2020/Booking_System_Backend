@@ -18,9 +18,9 @@
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Sections</span></a>
                 <ul class="dropdown-menu">
                     <li class="{{setSidebarActive(['admin.hero.index'])}}"><a class="nav-link" href="{{ route('admin.hero.index') }}">Hero</a></li>
+                    <li class="{{setSidebarActive(['admin.categories.index'])}}"><a class="nav-link" href="{{ route('admin.categories.index') }}">Categories</a></li>
                 </ul>
             </li>
-
             <li><a class="nav-link" href="#"><i class="far fa-square"></i> <span>Blank Page</span></a></li>
         </ul>
     </aside>
