@@ -22,12 +22,12 @@ class UpdateCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required', 'string', 'max:255', 'unique:categories,title'],
-            'icon_image' => ['required', 'image', 'mimes:jpg,png,jpeg,webp', 'max:2500'],
+            'title' => ['sometimes', 'required', 'string', 'max:255', 'unique:categories,title,' . $this->category],
+            'icon_image' => ['nullable', 'image', 'mimes:jpg,png,jpeg,webp', 'max:2000'],
             'status' => ['required', 'in:active,inactive'],
             'description' => ['nullable', 'string', 'max:2000'],
             'show_at_home' => ['required', 'in:yes,no'],
-            'bg_image' => ['required', 'image', 'mimes:jpg,png,jpeg,webp', 'max:3000'],
+            'bg_image' => ['nullable', 'image', 'mimes:jpg,png,jpeg,webp', 'max:3000'],
         ];
     }
 }

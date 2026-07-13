@@ -80,6 +80,7 @@ class CategoryDataTable extends DataTable
             Column::make('icon'),
             Column::make('bg_image'),
             Column::make('title'),
+            Column::make('status'),
             Column::make('show_at_home'),
             Column::computed('action')
                 ->exportable(false)

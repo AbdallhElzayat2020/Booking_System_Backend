@@ -63,15 +63,31 @@ class CategoryController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $category = Category::findOrFail($id);
+        return view('dashboard.categories.edit', compact('category'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateCategoryRequest $request, string $id)
     {
-        //
+        $category = Category::findOrFail($id);
+        $oldIcon = $category->icon_image;
+        $old_bg = $category->bg_image;
+
+        $category->update([
+            'title' => $request->title,
+            'slug' => Str::slug($request->title),
+            'status' => $request->status,
+            'description' => $request->description,
+            'show_at_home' => $request->show_at_home,
+            'icon_image' => $this->uploadFile($request, 'icon_image', $oldIcon, 'categories'),
+            'bg_image' => $this->uploadFile($request, 'bg_image', $old_bg, 'categories'),
+        ]);
+
+        return to_route('admin.categories.index')
+            ->with('success', 'updated successfully.');
     }
 
     /**
@@ -89,7 +105,5 @@ class CategoryController extends Controller
         return redirect()
             ->route('admin.categories.index')
             ->with('success', 'deleted successfully.');
-
-
     }
 }
