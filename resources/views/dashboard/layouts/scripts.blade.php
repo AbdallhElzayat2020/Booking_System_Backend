@@ -17,5 +17,6 @@
 {{-- Data Tables --}}
 <script src="//cdn.datatables.net/2.3.8/js/dataTables.min.js"></script>
 
-
+{{--Bootstrap IconPicker--}}
+<script src="{{asset('assets/admin/js/bootstrap-iconpicker.bundle.min.js')}}"></script>
 @stack('js')
