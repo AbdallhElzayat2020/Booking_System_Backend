@@ -20,3 +20,7 @@
 {{--Bootstrap IconPicker--}}
 <script src="{{asset('assets/admin/js/bootstrap-iconpicker.bundle.min.js')}}"></script>
 @stack('js')
+
+
+{{--select 2 --}}
+<script src="{{asset('assets/admin/modules/select2/dist/js/select2.full.min.js')}}"></script>
