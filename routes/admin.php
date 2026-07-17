@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AmenityController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\HeroController;
+use App\Http\Controllers\Admin\ListingController;
 use App\Http\Controllers\Admin\LocationController;
 use App\Http\Controllers\Admin\PasswordController;
 use App\Http\Controllers\Admin\ProfileController;
@@ -67,6 +68,10 @@ Route::group(['prefix' => 'admin',
 
         /* Amenities Routes */
         Route::resource('amenities', AmenityController::class);
+
+        /* Listings Routes */
+        Route::resource('listings', ListingController::class);
+
     });
 
 

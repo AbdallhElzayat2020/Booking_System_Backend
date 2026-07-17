@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 
@@ -16,6 +17,13 @@ class Category extends Model
         'status',
         'show_at_home',
     ];
+
+
+    public function scopeActive(Builder $query): Builder
+    {
+        return $query->where('status', 'active');
+    }
+
 
 
     // this for deletes image from storage when delete category but i'm use a observer class
