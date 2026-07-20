@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AmenityController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\HeroController;
 use App\Http\Controllers\Admin\ListingController;
+use App\Http\Controllers\Admin\ListingImageGalleryController;
 use App\Http\Controllers\Admin\LocationController;
 use App\Http\Controllers\Admin\PasswordController;
 use App\Http\Controllers\Admin\ProfileController;
@@ -72,6 +73,17 @@ Route::group(['prefix' => 'admin',
         /* Listings Routes */
         Route::resource('listings', ListingController::class);
 
+
+        /* Listing Image Gallery Routes */
+
+        Route::get('listings/{listing}/gallery-images', [ListingImageGalleryController::class, 'index'])
+            ->name('listings.gallery.index');
+
+        Route::post('listings/{listing}/gallery-images', [ListingImageGalleryController::class, 'store'])
+            ->name('listings.gallery.store');
+
+        Route::delete('/listings/{listing}/gallery-images/{image}', [ListingImageGalleryController::class, 'destroy'])
+            ->name('listings.gallery.destroy');
     });
 
 

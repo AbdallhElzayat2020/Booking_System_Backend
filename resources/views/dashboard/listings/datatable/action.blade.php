@@ -23,6 +23,14 @@
             <i class="fas fa-edit text-primary mr-2"></i> Edit
         </a>
 
+        {{-- Image Gallery --}}
+        <a class="dropdown-item"
+           href="{{ route('admin.listings.gallery.index',$listing->id) }}">
+            <i class="fas fa-images text-primary mr-2"></i>
+            Image Gallery
+        </a>
+
+
         <div class="dropdown-divider"></div>
 
         @if($listing->trashed())
