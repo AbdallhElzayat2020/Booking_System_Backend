@@ -30,6 +30,12 @@
             Image Gallery
         </a>
 
+        {{-- Video Gallery --}}
+        <a class="dropdown-item"
+           href="{{ route('admin.listings.videos-gallery.index', $listing->id) }}">
+            <i class="fas fa-video-camera text-primary mr-2"></i>
+            Video Gallery
+        </a>
 
         <div class="dropdown-divider"></div>
 

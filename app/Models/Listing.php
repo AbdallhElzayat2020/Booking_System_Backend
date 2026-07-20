@@ -71,4 +71,9 @@ class Listing extends Model
     {
         return $this->hasMany(ListingImageGallery::class);
     }
+
+    public function videos(): HasMany
+    {
+        return $this->hasMany(ListingVideoGallery::class);
+    }
 }
