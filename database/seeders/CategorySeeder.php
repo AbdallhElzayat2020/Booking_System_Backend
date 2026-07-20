@@ -24,5 +24,16 @@ class CategorySeeder extends Seeder
                 'status' => 'active',
             ]
         );
+        Category::updateOrCreate([
+            'slug' => 'category-2'
+        ],
+            [
+                'title' => 'Category2',
+                'description' => 'This is a sample category2.',
+                'icon_image' => 'test.png',
+                'bg_image' => 'test.png',
+                'status' => 'active',
+            ]
+        );
     }
 }

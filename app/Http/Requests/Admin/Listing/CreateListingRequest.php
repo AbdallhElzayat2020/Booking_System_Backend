@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Admin;
+namespace App\Http\Requests\Admin\Listing;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -39,16 +39,7 @@ class CreateListingRequest extends FormRequest
             'linkedin_link' => ['nullable', 'url', 'max:255'],
             'whatsapp_link' => ['nullable', 'url', 'max:255'],
             'google_map_embed_code' => ['nullable', 'string'],
-            'attachments' => [
-                'nullable',
-//                'array'
-            ],
-
-            'attachments.*' => [
-                'file',
-                'mimes:pdf,jpg,png,jpeg,zip',
-                'max:10000'
-            ],
+            'attachments' => ['nullable', 'file', 'mimes:pdf,jpg,png,jpeg,zip', 'max:10000'],
             'amenities' => ['required', 'array'],  // [1 , 2 ,3]
             'amenities.*' => ['exists:amenities,id'],
             'expired_date' => ['required', 'date'],

@@ -1,27 +1,65 @@
-<div class="d-flex justify-content-center align-items-center" style="gap: 8px;">
+<div class="dropdown">
+    <button class="btn btn-primary btn-sm dropdown-toggle"
+            type="button"
+            id="actionsDropdown{{ $listing->id }}"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false">
+        <i class="fas fa-cogs"></i> Actions
+    </button>
 
-    <a href="{{ route('admin.locations.edit', $location->id) }}"
-       class="btn btn-primary btn-sm"
-       title="Edit">
-        <i class="fas fa-edit"></i>
-    </a>
+    <div class="dropdown-menu dropdown-menu-right"
+         aria-labelledby="actionsDropdown{{ $listing->id }}">
 
-    <a href="{{ route('admin.locations.show', $location->id) }}"
-       class="btn btn-info btn-sm"
-       title="View">
-        <i class="fas fa-eye"></i>
-    </a>
+        {{-- View --}}
+        <a class="dropdown-item"
+           href="{{ route('admin.listings.show', $listing->id) }}">
+            <i class="fas fa-eye text-info mr-2"></i> View
+        </a>
 
-    <form action="{{ route('admin.locations.destroy', $location->id) }}" method="POST"
-          onsubmit="return confirm('Are you sure you want to delete this Location?')">
+        {{-- Edit --}}
+        <a class="dropdown-item"
+           href="{{ route('admin.listings.edit', $listing->id) }}">
+            <i class="fas fa-edit text-primary mr-2"></i> Edit
+        </a>
 
-        @csrf
-        @method('DELETE')
+        <div class="dropdown-divider"></div>
 
-        <button type="submit" class="btn btn-danger btn-sm" title="Delete">
-            <i class="fas fa-trash-alt"></i>
-        </button>
+        @if($listing->trashed())
 
-    </form>
+            {{-- Restore --}}
+            <button type="button"
+                    class="dropdown-item text-success"
+                    disabled>
+                <i class="fas fa-undo mr-2"></i>
+                Restore
+            </button>
 
+            {{-- Force Delete --}}
+            <button type="button"
+                    class="dropdown-item text-danger"
+                    disabled>
+                <i class="fas fa-trash mr-2"></i>
+                Force Delete
+            </button>
+
+        @else
+
+            {{-- Soft Delete --}}
+            <form action="{{ route('admin.listings.destroy', $listing->id) }}"
+                  method="POST"
+                  onsubmit="return confirm('Are you sure you want to delete this Listing?')">
+
+                @csrf
+                @method('DELETE')
+
+                <button type="submit" class="dropdown-item text-danger">
+                    <i class="fas fa-trash-alt mr-2"></i>
+                    Delete
+                </button>
+            </form>
+
+        @endif
+
+    </div>
 </div>

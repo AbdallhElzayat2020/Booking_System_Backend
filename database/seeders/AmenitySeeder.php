@@ -20,5 +20,26 @@ class AmenitySeeder extends Seeder
             'icon' => 'fa-solid fa-parking',
             'status' => 'active',
         ]);
+        Amenity::updateOrCreate([
+            'slug' => 'good-for-kids',
+        ], [
+            'title' => 'Good for kids',
+            'icon' => 'fa-solid fa-child',
+            'status' => 'active',
+        ]);
+        Amenity::updateOrCreate([
+            'slug' => 'free-coffee-and-tea',
+        ], [
+            'title' => 'Free coffee and tea',
+            'icon' => 'fa-solid fa-mug-saucer',
+            'status' => 'active',
+        ]);
+        Amenity::updateOrCreate([
+            'slug' => 'reservations',
+        ], [
+            'title' => 'Reservations',
+            'icon' => 'fa-solid fa-calendar-check',
+            'status' => 'active',
+        ]);
     }
 }

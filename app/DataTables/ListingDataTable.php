@@ -22,7 +22,18 @@ class ListingDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'listing.action')
+            ->addColumn('action', function ($listing) {
+                return view('dashboard.listings.datatable.action', ['listing' => $listing]);
+            })
+            ->addColumn('Category', function ($listing) {
+                return $listing->category->title;
+            })
+            ->addColumn('Location', function ($listing) {
+                return $listing->location->title;
+            })
+            ->addColumn('status', function ($listing) {
+                return view('dashboard.listings.datatable.status', ['listing' => $listing]);
+            })
             ->setRowId('id');
     }
 
@@ -31,7 +42,8 @@ class ListingDataTable extends DataTable
      */
     public function query(Listing $model): QueryBuilder
     {
-        return $model->newQuery();
+        return $model->newQuery()
+            ->with(['category', 'location']);
     }
 
     /**
@@ -40,20 +52,20 @@ class ListingDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->setTableId('listing-table')
-                    ->columns($this->getColumns())
-                    ->minifiedAjax()
-                    //->dom('Bfrtip')
-                    ->orderBy(1)
-                    ->selectStyleSingle()
-                    ->buttons([
-                        Button::make('excel'),
-                        Button::make('csv'),
-                        Button::make('pdf'),
-                        Button::make('print'),
-                        Button::make('reset'),
-                        Button::make('reload')
-                    ]);
+            ->setTableId('listing-table')
+            ->columns($this->getColumns())
+            ->minifiedAjax()
+            //->dom('Bfrtip')
+            ->orderBy(1)
+            ->selectStyleSingle()
+            ->buttons([
+                Button::make('excel'),
+                Button::make('csv'),
+                Button::make('pdf'),
+                Button::make('print'),
+                Button::make('reset'),
+                Button::make('reload')
+            ]);
     }
 
     /**
@@ -62,15 +74,16 @@ class ListingDataTable extends DataTable
     public function getColumns(): array
     {
         return [
+            Column::make('id')->width(50),
+            Column::make('title'),
+            Column::make('Category'),
+            Column::make('Location'),
+            Column::make('status'),
             Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center'),
-            Column::make('id'),
-            Column::make('add your columns'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
+                ->exportable(false)
+                ->printable(false)
+                ->width(60)
+                ->addClass('text-center'),
         ];
     }
 

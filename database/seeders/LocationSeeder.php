@@ -14,12 +14,30 @@ class LocationSeeder extends Seeder
     public function run(): void
     {
         Location::updateOrCreate([
-            'slug' => 'sample-location'
+            'slug' => 'cairo'
         ],
             [
-                'title' => 'sample location',
+                'title' => 'Cairo',
                 'status' => 'active',
-                'notes' => 'This is a sample location.',
+                'notes' => 'This is a Cairo location.',
+            ]
+        );
+        Location::updateOrCreate([
+            'slug' => 'paris'
+        ],
+            [
+                'title' => 'Paris',
+                'status' => 'active',
+                'notes' => 'This is a Paris location.',
+            ]
+        );
+        Location::updateOrCreate([
+            'slug' => 'germany'
+        ],
+            [
+                'title' => 'Germany',
+                'status' => 'active',
+                'notes' => 'This is a Germany location.',
             ]
         );
     }
