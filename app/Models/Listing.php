@@ -39,6 +39,7 @@ class Listing extends Model
         'expired_date',
         'status',
         'is_verified',
+        'is_approved',
         'is_featured',
         'seo_title',
         'seo_description',
@@ -80,5 +81,10 @@ class Listing extends Model
     public function schedules(): HasMany
     {
         return $this->hasMany(ListingSchedule::class);
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }

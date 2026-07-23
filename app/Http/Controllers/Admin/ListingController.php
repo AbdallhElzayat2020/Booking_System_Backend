@@ -113,8 +113,7 @@ class ListingController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public
-    function update(UpdateListingRequest $request, string $id)
+    public function update(UpdateListingRequest $request, string $id)
     {
         DB::beginTransaction();
         try {
@@ -126,6 +125,7 @@ class ListingController extends Controller
 
             $data = $request->validated();
             $data['slug'] = Str::slug($data['title']);
+            $data['is_approved'] = 'yes';
             $data['image'] = $this->uploadFile($request, 'image', $old_image, 'listings');
             $data['thumbnail_image'] = $this->uploadFile($request, 'thumbnail_image', $old_thumbnail_image, 'listings');
             $data['attachments'] = $this->uploadFile($request, 'attachments', $old_attachments, 'listings');
@@ -150,6 +150,9 @@ class ListingController extends Controller
     public
     function destroy(string $id)
     {
-        //
+        $listing = Listing::findOrFail($id);
+        $listing->delete();
+        return to_route('admin.listings.index')
+            ->with('success', 'Listing deleted successfully.');
     }
 }

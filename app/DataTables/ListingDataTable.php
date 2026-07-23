@@ -25,6 +25,9 @@ class ListingDataTable extends DataTable
             ->addColumn('action', function ($listing) {
                 return view('dashboard.listings.datatable.action', ['listing' => $listing]);
             })
+            ->addColumn('thumbnail_image', function ($listing) {
+                return view('dashboard.listings.datatable.thumbnail_image', ['listing' => $listing]);
+            })
             ->addColumn('Category', function ($listing) {
                 return $listing->category->title;
             })
@@ -33,6 +36,18 @@ class ListingDataTable extends DataTable
             })
             ->addColumn('status', function ($listing) {
                 return view('dashboard.listings.datatable.status', ['listing' => $listing]);
+            })
+            ->addColumn('Verified', function ($listing) {
+                return view('dashboard.listings.datatable.is_verified', ['listing' => $listing]);
+            })
+            ->addColumn('is_featured', function ($listing) {
+                return view('dashboard.listings.datatable.is_featured', ['listing' => $listing]);
+            })
+            ->addColumn('created_by', function ($listing) {
+                return $listing->user->name;
+            })
+            ->addColumn('is_approved', function ($listing) {
+                return view('dashboard.listings.datatable.is_approved', ['listing' => $listing]);
             })
             ->setRowId('id');
     }
@@ -43,7 +58,7 @@ class ListingDataTable extends DataTable
     public function query(Listing $model): QueryBuilder
     {
         return $model->newQuery()
-            ->with(['category', 'location']);
+            ->with(['category', 'location', 'user']);
     }
 
     /**
@@ -75,10 +90,15 @@ class ListingDataTable extends DataTable
     {
         return [
             Column::make('id')->width(50),
+            Column::make('thumbnail_image'),
             Column::make('title'),
             Column::make('Category'),
             Column::make('Location'),
             Column::make('status'),
+            Column::make('Verified'),
+            Column::make('is_featured'),
+            Column::make('is_approved'),
+            Column::make('created_by'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
