@@ -22,3 +22,26 @@
 <!--main/custom js-->
 <script src="{{asset('assets/client/js/main.js')}}"></script>
 @stack('js')
+
+{{--DataTables --}}
+<script src="//cdn.datatables.net/2.3.8/js/dataTables.min.js"></script>
+
+{{--select2 cdn--}}
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0/dist/js/select2.min.js"></script>
+
+{{--summernote cdn --}}
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote.min.js"></script>
+
+
+<script>
+    // Select2
+    if (jQuery().select2) {
+        $(".select2").select2();
+    }
+
+    // summernote
+    $(document).ready(function () {
+        $('#summernote').summernote();
+    });
+
+</script>
