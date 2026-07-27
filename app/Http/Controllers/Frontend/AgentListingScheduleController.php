@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Frontend;
 
 use App\DataTables\ListingScheduleDataTable;
 use App\Http\Controllers\Controller;
@@ -10,14 +10,15 @@ use App\Models\Listing;
 use App\Models\ListingSchedule;
 use Illuminate\Http\Request;
 
-class ListingScheduleController extends Controller
+class AgentListingScheduleController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index(ListingScheduleDataTable $dataTable, Listing $listing)
     {
-        return $dataTable->render('dashboard.listings.listing-schedule.index', compact('listing'));
+        $user = auth()->user();
+        return $dataTable->render('frontend.dashboard.listings.listing-schedule.index', compact('listing', 'user'));
     }
 
     /**
@@ -26,10 +27,8 @@ class ListingScheduleController extends Controller
     public function create(Listing $listing)
     {
         $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-        return view('dashboard.listings.listing-schedule.create', [
-            'listing' => $listing,
-            'days' => $days
-        ]);
+        $user = auth()->user();
+        return view('frontend.dashboard.listings.listing-schedule.create', compact('listing', 'user', 'days'));
     }
 
     /**
@@ -52,7 +51,7 @@ class ListingScheduleController extends Controller
             $listing->schedules()->create($data);
 
             return redirect()
-                ->route('admin.listings.schedules.index', $listing->id)
+                ->route('user.listings.schedules.index', $listing->id)
                 ->with('success', 'Schedule added successfully.');
 
         } catch (\Exception $e) {
@@ -76,12 +75,9 @@ class ListingScheduleController extends Controller
      */
     public function edit(Listing $listing, ListingSchedule $schedule)
     {
+        $user = auth()->user();
         $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-        return view('dashboard.listings.listing-schedule.edit', [
-            'days' => $days,
-            'listing' => $listing,
-            'schedule' => $schedule
-        ]);
+        return view('frontend.dashboard.listings.listing-schedule.edit', compact('listing', 'user', 'schedule', 'days'));
     }
 
     /**
@@ -107,7 +103,7 @@ class ListingScheduleController extends Controller
             $schedule->update($data);
 
             return redirect()
-                ->route('admin.listings.schedules.index', $listing->id)
+                ->route('user.listings.schedules.index', $listing->id)
                 ->with('success', 'Schedule updated successfully.');
 
         } catch (\Exception $e) {
@@ -117,7 +113,6 @@ class ListingScheduleController extends Controller
                 ->with('error', 'Error: ' . $e->getMessage());
         }
     }
-
     /**
      * Remove the specified resource from storage.
      */
@@ -134,7 +129,7 @@ class ListingScheduleController extends Controller
             }
 
             return redirect()
-                ->route('admin.listings.schedules.index', $listing->id)
+                ->route('user.listings.schedules.index', $listing->id)
                 ->with('success', 'Schedule deleted successfully.');
 
         } catch (\Exception $e) {

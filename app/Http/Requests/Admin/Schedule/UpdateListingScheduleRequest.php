@@ -22,7 +22,10 @@ class UpdateListingScheduleRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'day' => ['required', 'string'],
+            'start_time' => ['required'],
+            'end_time' => ['required'],
+            'status' => ['required', 'in:active,inactive'],
         ];
     }
 }

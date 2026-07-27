@@ -5,6 +5,7 @@ namespace App\Http\Requests\Frontend\Listing;
 use App\Models\Listing;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class UpdateAgentListingRequest extends FormRequest
 {
@@ -26,7 +27,7 @@ class UpdateAgentListingRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules(): array
+    public function rules()
     {
         return [
             'category_id' => ['required', 'exists:categories,id', 'integer'],
@@ -34,7 +35,12 @@ class UpdateAgentListingRequest extends FormRequest
             'package_id' => ['nullable', 'exists:packages,id', 'integer'],
             'image' => ['nullable', 'image', 'mimes:jpg,png,jpeg,webp', 'max:3000'],
             'thumbnail_image' => ['nullable', 'image', 'mimes:jpg,png,jpeg,webp', 'max:3000'],
-            'title' => ['required', 'string', 'max:255', 'unique:listings,title,' . $this->listing],
+            'title' => [
+                'required',
+                'string',
+                'max:255',
+                 Rule::unique('listings', 'title')->ignore($this->route('listing')->id)
+            ],
             'description' => ['required', 'string'],
             'phone' => ['required', 'string', 'max:20'],
             'email' => ['required', 'email', 'max:255'],

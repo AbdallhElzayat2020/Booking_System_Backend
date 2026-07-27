@@ -12,9 +12,16 @@
                 </ul>
             </div>
             <div class="col-xl-6 col-md-5">
-                <div class="wsus__topbar_right">
-                    <a href="{{ route('login') }}"><i class="fas fa-user"></i> Login</a>
-                </div>
+
+                @auth
+                    <div class="wsus__topbar_right">
+                        <a href="{{ route('user.dashboard') }}"><i class="fas fa-user"></i>Profile</a>
+                    </div>
+                @else
+                    <div class="wsus__topbar_right">
+                        <a href="{{ route('login') }}"><i class="fas fa-user"></i> Login</a>
+                    </div>
+                @endauth
             </div>
         </div>
     </div>

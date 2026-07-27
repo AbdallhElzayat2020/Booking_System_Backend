@@ -135,8 +135,8 @@ class AgentListingController extends Controller
             $data['attachments'] = $this->uploadFile($request, 'attachments', $old_attachments, 'listings');
             $data['user_id'] = Auth::id();
 
-            $listing->amenities()->sync($data['amenities']);
             $listing->update($data);
+            $listing->amenities()->sync($data['amenities']);
             DB::commit();
             return to_route('user.listings.index')
                 ->with('success', 'Listing updated successfully.');

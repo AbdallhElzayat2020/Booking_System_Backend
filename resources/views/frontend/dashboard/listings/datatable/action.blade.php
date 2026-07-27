@@ -31,7 +31,7 @@
         {{-- Image Gallery --}}
         <li>
             <a class="dropdown-item"
-               href="{{ route('admin.listings.gallery.index', $listing->id) }}">
+               href="{{ route('user.listings.gallery.index', $listing->id) }}">
                 <i class="fas fa-images text-primary me-2"></i>
                 Image Gallery
             </a>
@@ -40,7 +40,7 @@
         {{-- Video Gallery --}}
         <li>
             <a class="dropdown-item"
-               href="{{ route('admin.listings.videos-gallery.index', $listing->id) }}">
+               href="{{ route('user.listings.videos-gallery.index', $listing->id) }}">
                 {{--                <i class="fas fa-video-camera text-primary me-2"></i>--}}
                 <i class="fa-solid fa-video text-primary me-2"></i>
                 Video Gallery
@@ -50,7 +50,7 @@
         {{-- Schedule --}}
         <li>
             <a class="dropdown-item"
-               href="{{ route('admin.listings.schedules.index', $listing) }}">
+               href="{{ route('user.listings.schedules.index', $listing) }}">
                 <i class="fas fa-calendar-alt text-primary me-2"></i>
                 Schedule
             </a>
