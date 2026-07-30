@@ -18,6 +18,9 @@ class AgentListingScheduleController extends Controller
     public function index(ListingScheduleDataTable $dataTable, Listing $listing)
     {
         $user = auth()->user();
+        if ($listing->user_id !== $user->id) {
+            abort(403, 'Unauthorized action.');
+        }
         return $dataTable->render('frontend.dashboard.listings.listing-schedule.index', compact('listing', 'user'));
     }
 
@@ -63,20 +66,17 @@ class AgentListingScheduleController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
     public function edit(Listing $listing, ListingSchedule $schedule)
     {
         $user = auth()->user();
         $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
+        if ($listing->user_id !== $user->id) {
+            abort(403, 'Unauthorized action.');
+        }
+
         return view('frontend.dashboard.listings.listing-schedule.edit', compact('listing', 'user', 'schedule', 'days'));
     }
 
@@ -85,6 +85,10 @@ class AgentListingScheduleController extends Controller
      */
     public function update(UpdateListingScheduleRequest $request, Listing $listing, ListingSchedule $schedule)
     {
+        if ($listing->user_id !== auth()->user()->id) {
+            abort(403, 'Unauthorized action.');
+        }
+
         try {
             $data = $request->validated();
 
@@ -113,11 +117,15 @@ class AgentListingScheduleController extends Controller
                 ->with('error', 'Error: ' . $e->getMessage());
         }
     }
+
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Listing $listing, ListingSchedule $schedule)
     {
+        if ($listing->user_id !== auth()->user()->id) {
+            abort(403, 'Unauthorized action.');
+        }
         try {
             $schedule->delete();
 

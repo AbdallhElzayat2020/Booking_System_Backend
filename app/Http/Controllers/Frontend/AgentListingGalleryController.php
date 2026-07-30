@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 class AgentListingGalleryController extends Controller
 {
     use FileHandler;
+
     /**
      * Display a listing of the resource.
      */
@@ -18,16 +19,13 @@ class AgentListingGalleryController extends Controller
     {
         $images = $listing->images;
         $user = auth()->user();
+
+        if ($listing->user_id !== $user->id) {
+            abort(403, 'You are not authorized to view this listing.');
+        }
         return view('frontend.dashboard.listings.imageGallery.index', compact('listing', 'images', 'user'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -63,6 +61,11 @@ class AgentListingGalleryController extends Controller
      */
     public function destroy(Listing $listing, ListingImageGallery $image)
     {
+
+        if ($listing->user_id !== auth()->user()->id) {
+            abort(403, 'You are not authorized to delete this image.');
+        }
+
         try {
 
             $this->deleteFile($image->image, 'listing_images');

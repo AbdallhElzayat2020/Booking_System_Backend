@@ -16,6 +16,12 @@ class AgentListingVideoGalleryController extends Controller
     {
         $videos = $listing->videos;
         $user = auth()->user();
+
+
+        if ($listing->user_id !== auth()->user()->id) {
+            abort(403, 'Unauthorized action.');
+        }
+
         return view('frontend.dashboard.listings.videoGallery.index', compact('listing', 'videos', 'user'));
     }
 
@@ -41,10 +47,12 @@ class AgentListingVideoGalleryController extends Controller
 
     public function destroy(Listing $listing, ListingVideoGallery $video)
     {
+        if ($listing->user_id !== auth()->user()->id) {
+            abort(403, 'Unauthorized action.');
+        }
+
         try {
-
             $listing->videos()->findOrFail($video->id)->delete();
-
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }

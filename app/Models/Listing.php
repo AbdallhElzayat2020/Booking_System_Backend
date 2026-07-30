@@ -51,6 +51,26 @@ class Listing extends Model
         return $query->where('status', 'active');
     }
 
+    public function scopeInActive(Builder $query): Builder
+    {
+        return $query->where('status','inactive');
+    }
+
+    public function scopeShowAtHome(Builder $query): Builder
+    {
+        return $query->where('is_featured', 'yes');
+    }
+
+    public function scopeApproved(Builder $query): Builder
+    {
+        return $query->where('is_approved', 'yes');
+    }
+
+    public function scopePending(Builder $query): Builder
+    {
+        return $query->where('is_approved', 'no');
+    }
+
     // -------------- Relationships -----------------
 
     public function amenities(): BelongsToMany

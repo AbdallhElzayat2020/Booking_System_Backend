@@ -85,6 +85,12 @@ class AmenityController extends Controller
     public function destroy(string $id)
     {
         $amenity = Amenity::findOrFail($id);
+
+        if ($amenity->listings()->count() > 0) {
+            return to_route('admin.amenities.index')
+                ->with('error', 'Cannot delete this amenity. It is associated with one or more listings.');
+        }
+
         $amenity->delete();
         return to_route('admin.amenities.index')
             ->with('success', 'deleted successfully.');

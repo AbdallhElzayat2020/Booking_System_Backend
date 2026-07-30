@@ -33,6 +33,7 @@
                     <li class="{{setSidebarActive(['admin.locations.*'])}}"><a class="nav-link" href="{{ route('admin.locations.index') }}">Locations</a></li>
                     <li class="{{setSidebarActive(['admin.amenities.*'])}}"><a class="nav-link" href="{{ route('admin.amenities.index') }}">Amenities</a></li>
                     <li class="{{setSidebarActive(['admin.listings.*'])}}"><a class="nav-link" href="{{ route('admin.listings.index') }}">Listings</a></li>
+                    <li class="{{setSidebarActive(['admin.listing.pending.index'])}}"><a class="nav-link" href="{{ route('admin.listing.pending.index') }}">Pending Listings</a></li>
                 </ul>
             </li>
 

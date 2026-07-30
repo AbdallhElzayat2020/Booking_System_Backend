@@ -2,7 +2,6 @@
 
 namespace App\DataTables;
 
-use App\Models\AgentListing;
 use App\Models\Listing;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
@@ -13,7 +12,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class AgentListingDataTable extends DataTable
+class PendingListingDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
@@ -23,26 +22,20 @@ class AgentListingDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('Category', function (Listing $listing) {
-                return $listing->title;
+            ->addColumn('thumbnail_image', function ($listing) {
+                return view('dashboard.listings.datatable.thumbnail_image', ['listing' => $listing]);
             })
-            ->addColumn('Category', function (Listing $listing) {
+            ->addColumn('Category', function ($listing) {
                 return $listing->category->title;
             })
-            ->addColumn('Location', function (Listing $listing) {
+            ->addColumn('Location', function ($listing) {
                 return $listing->location->title;
             })
-            ->addColumn('status', function (Listing $listing) {
-                return view('frontend.dashboard.listings.datatable.status', ['listing' => $listing]);
+            ->addColumn('Created_by', function ($listing) {
+                return $listing->user->name;
             })
-            ->addColumn('Approved', function (Listing $listing) {
-                return view('frontend.dashboard.listings.datatable.is_approved', ['listing' => $listing]);
-            })
-            ->addColumn('Verified', function (Listing $listing) {
-                return view('frontend.dashboard.listings.datatable.is_verified', ['listing' => $listing]);
-            })
-            ->addColumn('action', function (Listing $listing) {
-                return view('frontend.dashboard.listings.datatable.action', ['listing' => $listing]);
+            ->addColumn('Approved', function ($listing) {
+                return view('dashboard.listings.datatable.is_approved', ['listing' => $listing]);
             })
             ->setRowId('id');
     }
@@ -53,8 +46,12 @@ class AgentListingDataTable extends DataTable
     public function query(Listing $model): QueryBuilder
     {
         return $model->newQuery()
-            ->where('user_id', auth()->id())
-            ->with(['category', 'location']);
+            ->pending()
+            ->with([
+                'category',
+                'location',
+                'user',
+            ]);
     }
 
     /**
@@ -63,7 +60,7 @@ class AgentListingDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-            ->setTableId('agentlisting-table')
+            ->setTableId('pendinglisting-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
             //->dom('Bfrtip')
@@ -85,18 +82,13 @@ class AgentListingDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('id')->width(50),
+            Column::make('id'),
+            Column::make('thumbnail_image'),
             Column::make('title'),
             Column::make('Category'),
             Column::make('Location'),
-            Column::make('status'),
-            Column::make('Verified'),
+            Column::make('Created_by'),
             Column::make('Approved'),
-            Column::computed('action')
-                ->exportable(false)
-                ->printable(false)
-                ->width(60)
-                ->addClass('text-center'),
         ];
     }
 
@@ -105,6 +97,6 @@ class AgentListingDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'AgentListing_' . date('YmdHis');
+        return 'PendingListing_' . date('YmdHis');
     }
 }

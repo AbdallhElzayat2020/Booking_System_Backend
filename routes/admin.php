@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\ListingScheduleController;
 use App\Http\Controllers\Admin\ListingVideoController;
 use App\Http\Controllers\Admin\LocationController;
 use App\Http\Controllers\Admin\PasswordController;
+use App\Http\Controllers\Admin\PendingListingController;
 use App\Http\Controllers\Admin\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\HomeController;
@@ -56,7 +57,6 @@ Route::group(['prefix' => 'admin',
 
 
         /*  --- Hero Routes --- */
-
         Route::get('hero-section', [HeroController::class, 'index'])
             ->name('hero.index');
 
@@ -74,7 +74,9 @@ Route::group(['prefix' => 'admin',
 
         /* Listings Routes */
         Route::resource('listings', ListingController::class);
-
+        /* Pending Listings Routes */
+        Route::get('listing/pending', [PendingListingController::class, 'index'])->name('listing.pending.index');
+        Route::post('listing/pending', [PendingListingController::class, 'updateStatus'])->name('listing.update-status');
 
         /* Listing Image Gallery Routes */
         Route::get('listings/{listing}/gallery-images', [ListingImageGalleryController::class, 'index'])

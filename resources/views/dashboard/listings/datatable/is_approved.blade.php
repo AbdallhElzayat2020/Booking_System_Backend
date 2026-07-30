@@ -1,5 +1,4 @@
-@if($listing->is_approved == 'yes')
-    <span class="badge bg-success text-black">Approved</span>
-@else
-    <span class="badge bg-warning text-white">Pending</span>
-@endif
+<select class="form-control approve" data-id="{{$listing->id}}">
+    <option value="no">Pending</option>
+    <option value="yes">Approved</option>
+</select>
