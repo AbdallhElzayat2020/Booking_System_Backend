@@ -45,3 +45,25 @@
     });
 
 </script>
+
+
+<script>
+    function showListingModal(id) {
+
+        $.ajax({
+            method: 'GET',
+            url: '{{route("listing.show-modal",":id")}}'.replace(":id",id),
+            data: {},
+
+            success: function (response) {
+                $('.modal-listing-content').html(response)
+            },
+            error: function (xhr, status, error) {
+                console.log(error)
+            },
+
+
+        });
+
+    }
+</script>

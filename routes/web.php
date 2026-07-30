@@ -5,6 +5,7 @@ use App\Http\Controllers\Frontend\AgentListingGalleryController;
 use App\Http\Controllers\Frontend\AgentListingScheduleController;
 use App\Http\Controllers\Frontend\AgentListingVideoGalleryController;
 use App\Http\Controllers\Frontend\DashboardController;
+use App\Http\Controllers\Frontend\ListingController;
 use App\Http\Controllers\Frontend\PasswordController;
 use App\Http\Controllers\Frontend\ProfileController;
 use App\Http\Controllers\Frontend\HomeController;
@@ -36,12 +37,9 @@ use Illuminate\Support\Facades\Route;
 /* --------------------- public Routes --------------------- */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-
-
-
-
-
-
+Route::get('listing-menu/{slug}', [ListingController::class, 'listings'])->name('listing-menu');
+Route::get('listing-details/{slug}', [ListingController::class, 'listingDetails'])->name('listing-details');
+Route::get('listing-modal/{id}', [ListingController::class, 'showModal'])->name('listing.show-modal');
 
 
 /* --------------------- Protected Routes --------------------- */
@@ -59,9 +57,8 @@ Route::group([
     Route::put('password-update', [PasswordController::class, 'update'])->name('password.update');
 
 
-
     /* ---- listings Routes ----- */
-    Route::resource('listings',AgentListingController::class);
+    Route::resource('listings', AgentListingController::class);
 
     /* Listing Image Gallery Routes */
     Route::get('listings/{listing}/gallery-images', [AgentListingGalleryController::class, 'index'])

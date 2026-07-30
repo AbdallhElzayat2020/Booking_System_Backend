@@ -6,7 +6,7 @@
                     @foreach($categories as $category)
 
                         <div class="col-xl-2">
-                            <a href="#" class="wsus__category_single_slider">
+                            <a href="{{route('listing-menu',$category->slug)}}" class="wsus__category_single_slider">
                             <span>
                                 <img src="{{asset('categories/'.$category->icon_image)}}" alt="category" class="img-fluid w-100">
                             </span>

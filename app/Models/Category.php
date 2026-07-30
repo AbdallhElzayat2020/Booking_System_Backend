@@ -27,7 +27,7 @@ class Category extends Model
 
     public function scopeInActive(Builder $query): Builder
     {
-        return $query->where('status', 'active');
+        return $query->where('status', 'inactive');
     }
 
     public function scopeShowAtHome(Builder $query): Builder
