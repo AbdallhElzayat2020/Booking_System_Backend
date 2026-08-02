@@ -40,7 +40,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('listing-menu/{slug}', [ListingController::class, 'listings'])->name('listing-menu');
 Route::get('listing-details/{slug}', [ListingController::class, 'listingDetails'])->name('listing-details');
 Route::get('listing-modal/{id}', [ListingController::class, 'showModal'])->name('listing.show-modal');
-
+Route::get('all-listings', [ListingController::class, 'allListings'])->name('all-listings');
 
 /* --------------------- Protected Routes --------------------- */
 

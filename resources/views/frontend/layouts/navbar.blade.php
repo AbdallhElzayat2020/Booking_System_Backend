@@ -53,7 +53,7 @@
                     <a class="nav-link" href="about.html">about</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="listing_grid_view.html">listing</a>
+                    <a class="nav-link" href="{{ route('all-listings') }}">listings</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="pricing.html">pricing</a>

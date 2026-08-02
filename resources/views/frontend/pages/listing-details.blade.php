@@ -5,7 +5,7 @@
     <!--==========================
         BREADCRUMB PART START
     ===========================-->
-    <div id="breadcrumb_part">
+    <div id="breadcrumb_part" style="background-image: url({{asset('listings/'.$listing->thumbnail_image)}})">
         <div class="bread_overlay">
             <div class="container">
                 <div class="row justify-content-center">
@@ -41,7 +41,7 @@
                             </div>
                             <div class="listing_det_header_text">
                                 <h6>{{$listing->title}}</h6>
-                                <p class="host_name">Hosted by <a href="agent_public_profile.html">{{$listing->user->name}}</a></p>
+                                <p class="host_name">Hosted by <a href="#">{{$listing->user->name}}</a></p>
                                 <p class="rating">
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
@@ -53,11 +53,18 @@
                                 </p>
                                 <ul>
                                     @if($listing->is_verified)
-                                        <li><a href="#"><i class="far fa-check"></i> Verified</a></li>
+                                        <li><a href="javascript:void(0)"><i class="far fa-check"></i> Verified</a></li>
                                     @endif
+                                    @if($listing->is_featured)
+                                        <li><a href="javascript:void(0)"><i class="far fa-star"></i> Featured</a></li>
+                                    @endif
+
                                     <li><a href="#"><i class="fal fa-heart"></i> Add to Favorite</a></li>
+
                                     <li><a href="#"><i class="fal fa-eye"></i> {{$listing->views}}</a></li>
+
                                     <li><a href="#">Open</a></li>
+
                                 </ul>
                             </div>
                         </div>
@@ -68,175 +75,59 @@
                         </div>
                         <div class="listing_det_Photo">
                             <div class="row">
-                                <div class="col-xl-3 col-sm-6">
-                                    <a class="venobox" data-gall="gallery01" href="../../../../public/assets/client/images/user_small2.jpg">
-                                        <img src="../../../../public/assets/client/images/user_small2.jpg" alt="gallery1" class="img-fluid w-100">
-                                        <div class="photo_overlay">
-                                            <i class="fal fa-plus"></i>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-xl-3 col-sm-6">
-                                    <a class="venobox" data-gall="gallery01" href="../../../../public/assets/client/images/user_small3.jpg">
-                                        <img src="../../../../public/assets/client/images/user_small3.jpg" alt="gallery1" class="img-fluid w-100">
-                                        <div class="photo_overlay">
-                                            <i class="fal fa-plus"></i>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-xl-3 col-sm-6">
-                                    <a class="venobox" data-gall="gallery01" href="../../../../public/assets/client/images/user_small4.jpg">
-                                        <img src="../../../../public/assets/client/images/user_small4.jpg" alt="gallery1" class="img-fluid w-100">
-                                        <div class="photo_overlay">
-                                            <i class="fal fa-plus"></i>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-xl-3 col-sm-6">
-                                    <a class="venobox" data-gall="gallery01" href="../../../../public/assets/client/images/user_small5.jpg">
-                                        <img src="../../../../public/assets/client/images/user_small5.jpg" alt="gallery1" class="img-fluid w-100">
-                                        <div class="photo_overlay">
-                                            <i class="fal fa-plus"></i>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-xl-3 col-sm-6">
-                                    <a class="venobox" data-gall="gallery01" href="../../../../public/assets/client/images/user_small5.jpg">
-                                        <img src="../../../../public/assets/client/images/user_small5.jpg" alt="gallery1" class="img-fluid w-100">
-                                        <div class="photo_overlay">
-                                            <i class="fal fa-plus"></i>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-xl-3 col-sm-6">
-                                    <a class="venobox" data-gall="gallery01" href="../../../../public/assets/client/images/user_small4.jpg">
-                                        <img src="../../../../public/assets/client/images/user_small4.jpg" alt="gallery1" class="img-fluid w-100">
-                                        <div class="photo_overlay">
-                                            <i class="fal fa-plus"></i>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-xl-3 col-sm-6">
-                                    <a class="venobox" data-gall="gallery01" href="../../../../public/assets/client/images/user_small3.jpg">
-                                        <img src="../../../../public/assets/client/images/user_small3.jpg" alt="gallery1" class="img-fluid w-100">
-                                        <div class="photo_overlay">
-                                            <i class="fal fa-plus"></i>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-xl-3 col-sm-6">
-                                    <a class="venobox" data-gall="gallery01" href="../../../../public/assets/client/images/user_small.jpg">
-                                        <img src="../../../../public/assets/client/images/user_small.jpg" alt="gallery1" class="img-fluid w-100">
-                                        <div class="photo_overlay">
-                                            <i class="fal fa-plus"></i>
-                                        </div>
-                                    </a>
-                                </div>
+
+                                @foreach($listing->images as $image)
+                                    <div class="col-xl-3 col-sm-6">
+                                        <a class="venobox" data-gall="gallery01" href="{{asset('listing_images/'.$image->image)}}">
+                                            <img src="{{asset('listing_images/'.$image->image)}}" alt="gallery1" class="img-fluid w-100">
+                                            <div class="photo_overlay">
+                                                <i class="fal fa-plus"></i>
+                                            </div>
+                                        </a>
+                                    </div>
+                                @endforeach
+
                             </div>
                         </div>
                         <div class="listing_det_feature">
                             <div class="row">
-                                <div class="col-xl-4 col-sm-6">
-                                    <div class="listing_det_feature_single">
-                                        <i class="fas fa-biking"></i>
-                                        <span>Good for kids</span>
+                                @foreach($listing->amenities as $amenity)
+                                    <div class="col-xl-4 col-sm-6">
+                                        <div class="listing_det_feature_single">
+                                            <i class="{{$amenity->icon}}"></i>
+                                            <span>{{$amenity->title}}</span>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-xl-4 col-sm-6">
-                                    <div class="listing_det_feature_single">
-                                        <i class="fal fa-car-building"></i>
-                                        <span> Elevator in building</span>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-sm-6">
-                                    <div class="listing_det_feature_single">
-                                        <i class="fas fa-recycle"></i>
-                                        <span>Free coffee and tea</span>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-sm-6">
-                                    <div class="listing_det_feature_single">
-                                        <i class="fal fa-star"></i>
-                                        <span>Reservations</span>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-sm-6">
-                                    <div class="listing_det_feature_single">
-                                        <i class="fal fa-clock"></i>
-                                        <span>Alcohol</span>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-sm-6">
-                                    <div class="listing_det_feature_single">
-                                        <i class="fab fa-jedi-order"></i>
-                                        <span>Bike Parking</span>
-                                    </div>
-                                </div>
+                                @endforeach
+
                             </div>
                         </div>
+
                         <div class="listing_det_video">
                             <div class="row">
-                                <div class="col-xl-4 col-sm-6">
-                                    <div class="listing_det_video_img">
-                                        <img src="../../../../public/assets/client/images/video_1.jpg" alt="img" class="img-fluid w-100">
-                                        <a class="venobox" data-autoplay="true" data-vbtype="video"
-                                           href="https://youtu.be/7EHnQ0VM4KY">
-                                            <i class=" fas fa-play"></i>
-                                        </a>
+                                @foreach($listing->videos as $video)
+
+                                    <div class="col-xl-4 col-sm-6">
+                                        <div class="listing_det_video_img">
+                                            <img src="https://img.youtube.com/vi/{{ $video->video_url }}/hqdefault.jpg"
+                                                 alt="img" class="img-fluid w-100">
+                                            <a class="venobox" data-autoplay="true" target="_blank" data-vbtype="video"
+                                               href="https://www.youtube.com/watch?v={{ $video->video_url }}">
+                                                <i class=" fas fa-play"></i>
+                                            </a>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-xl-4 col-sm-6">
-                                    <div class="listing_det_video_img">
-                                        <img src="../../../../public/assets/client/images/video_2.jpg" alt="img" class="img-fluid w-100">
-                                        <a class="venobox" data-autoplay="true" data-vbtype="video"
-                                           href="https://youtu.be/7EHnQ0VM4KY">
-                                            <i class=" fas fa-play"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-sm-6">
-                                    <div class="listing_det_video_img">
-                                        <img src="../../../../public/assets/client/images/video_3.jpg" alt="img" class="img-fluid w-100">
-                                        <a class="venobox" data-autoplay="true" data-vbtype="video"
-                                           href="https://youtu.be/7EHnQ0VM4KY">
-                                            <i class=" fas fa-play"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-sm-6">
-                                    <div class="listing_det_video_img">
-                                        <img src="../../../../public/assets/client/images/video_4.jpg" alt="img" class="img-fluid w-100">
-                                        <a class="venobox" data-autoplay="true" data-vbtype="video"
-                                           href="https://youtu.be/7EHnQ0VM4KY">
-                                            <i class=" fas fa-play"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-sm-6">
-                                    <div class="listing_det_video_img">
-                                        <img src="../../../../public/assets/client/images/video_5.jpg" alt="img" class="img-fluid w-100">
-                                        <a class="venobox" data-autoplay="true" data-vbtype="video"
-                                           href="https://youtu.be/7EHnQ0VM4KY">
-                                            <i class=" fas fa-play"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-sm-6">
-                                    <div class="listing_det_video_img">
-                                        <img src="../../../../public/assets/client/images/video_1.jpg" alt="img" class="img-fluid w-100">
-                                        <a class="venobox" data-autoplay="true" data-vbtype="video"
-                                           href="https://youtu.be/7EHnQ0VM4KY">
-                                            <i class=" fas fa-play"></i>
-                                        </a>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
-                        <div class="listing_det_location">
-                            <iframe
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14602.678639283793!2d90.39695083611213!3d23.794774936848686!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c70c15ea1de1%3A0x97856381e88fb311!2z4Kas4Kao4Ka-4Kao4KeAIOCmruCmoeCnh-CmsiDgpp_gpr7gpongpqgsIOCmouCmvuCmleCmvg!5e0!3m2!1sbn!2sbd!4v1634550875957!5m2!1sbn!2sbd"
-                                width="1000" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-                        </div>
+
+                        @if($listing->google_map_embed_code)
+                            <div class="listing_det_location">
+                                {!! $listing->google_map_embed_code !!}
+                            </div>
+                        @endif
+
+
                         <div class="wsus__listing_review">
                             <h4>reviews 04</h4>
                             <div class="wsus__single_comment">
@@ -334,72 +225,108 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="col-xl-4 col-lg-5">
                     <div class="listing_details_sidebar">
                         <div class="row">
                             <div class="col-12">
                                 <div class="listing_det_side_address">
-                                    <a href="callto:+96544444222221100"><i class="fal fa-phone-alt"></i>
-                                        +96544444222221100</a>
-                                    <a href="mailto:example@gmail.com"><i class="fal fa-envelope"></i>
-                                        example@gmail.com</a>
-                                    <p><i class="fal fa-map-marker-alt"></i> Washington, Indiana</p>
-                                    <p><i class="fal fa-globe"></i> https://example.com</p>
+                                    @if($listing->phone)
+                                        <a href="callto:{{$listing->phone}}"><i class="fal fa-phone-alt"></i>{{$listing->phone}}</a>
+                                    @endif
+                                    @if($listing->email)
+                                        <a href="mailto:{{$listing->email}}"><i class="fal fa-envelope"></i>{{$listing->email}}</a>
+                                    @endif
+                                    @if($listing->location)
+                                        <p><i class="fal fa-map-marker-alt"></i>{{$listing->location->title}}</p>
+                                    @endif
+                                    @if($listing->website)
+                                        <p><i class="fal fa-globe"></i>{{$listing->website}}</p>
+                                    @endif
                                     <ul>
-                                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-whatsapp"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-behance"></i></a></li>
+                                        @if($listing->facebook_link)
+                                            <li>
+                                                <a href="{{$listing->facebook_link}}" target="_blank">
+                                                    <i class="fab fa-facebook-f"></i>
+                                                </a>
+                                            </li>
+                                        @endif
+                                        @if($listing->x_link)
+                                            <li>
+                                                <a href="{{$listing->x_link}}" target="_blank">
+                                                    <i class="fab fa-twitter"></i>
+                                                </a>
+                                            </li>
+                                        @endif
+                                        @if($listing->linkedin_link)
+                                            <li>
+                                                <a href="{{$listing->linkedin_link}}" target="_blank">
+                                                    <i class="fab fa-linkedin-in"></i>
+                                                </a>
+                                            </li>
+                                        @endif
+                                        @if($listing->whatsapp_link)
+                                            <li>
+                                                <a href="{{$listing->whatsapp_link}}" target="_blank">
+                                                    <i class="fab fa-whatsapp"></i>
+                                                </a>
+                                            </li>
+                                        @endif
+                                        @if($listing->instagram_link)
+                                            <li>
+                                                <a href="{{$listing->instagram_link}}" target="_blank">
+                                                    <i class="fab fa-instagram"></i>
+                                                </a>
+                                            </li>
+                                        @endif
                                     </ul>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="listing_det_side_open_hour">
                                     <h5>Opening Hours</h5>
-                                    <p>Saturday <span>10:00 AM - 06:00 PM</span></p>
-                                    <p>Sunday <span>Close</span></p>
-                                    <p>Monday <span>10:00 AM - 06:00 PM</span></p>
-                                    <p>Yuesday <span>10:00 AM - 06:00 PM</span></p>
-                                    <p>Wednesday <span>10:00 AM - 06:00 PM</span></p>
-                                    <p>Thursday <span>10:00 AM - 06:00 PM</span></p>
-                                    <p>Friday <span>10:00 AM - 06:00 PM</span></p>
+                                    @foreach($listing->schedules as $schedule)
+
+                                        <p>{{$schedule->day}}
+                                            <span>
+                                                {{ \Carbon\Carbon::parse($schedule->start_time)->format('g:i A') }} -
+                                                {{ \Carbon\Carbon::parse($schedule->end_time)->format('g:i A') }}
+                                            </span>
+                                        </p>
+                                    @endforeach
                                 </div>
                             </div>
-                            <div class="col-12">
-                                <div class="listing_det_side_contact">
-                                    <h5>quick contact</h5>
-                                    <form>
-                                        <form type="text" placeholder="Name*">
-                                            <input type="email" placeholder="Email*">
-                                            <input type="text" placeholder="Phone*">
-                                            <input type="text" placeholder="Subject*">
-                                            <textarea cols="3" rows="5" placeholder="Message*"></textarea>
-                                            <button type="submit" class="read_btn">send</button>
-                                        </form>
-                                </div>
-                            </div>
+
+{{--                            <div class="col-12">--}}
+{{--                                <div class="listing_det_side_contact">--}}
+{{--                                    <h5>quick contact</h5>--}}
+{{--                                    <form>--}}
+{{--                                        <form type="text" placeholder="Name*">--}}
+{{--                                            <input type="email" placeholder="Email*">--}}
+{{--                                            <input type="text" placeholder="Phone*">--}}
+{{--                                            <input type="text" placeholder="Subject*">--}}
+{{--                                            <textarea cols="3" rows="5" placeholder="Message*"></textarea>--}}
+{{--                                            <button type="submit" class="read_btn">send</button>--}}
+{{--                                        </form>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+
+                            {{--  $similarListings --}}
                             <div class="col-12">
                                 <div class="listing_det_side_list">
                                     <h5>Similar Listing</h5>
-                                    <a href="#" class="sidebar_blog_single">
-                                        <div class="sidebar_blog_img">
-                                            <img src="../../../../public/assets/client/images/location_1.jpg" alt="blog" class="imgofluid w-100">
-                                        </div>
-                                        <div class="sidebar_blog_text">
-                                            <h5>One Thing Separates Creators From Consumers</h5>
-                                            <p><span>Jul 29 2021 </span> 2 Comment </p>
-                                        </div>
-                                    </a>
-                                    <a href="#" class="sidebar_blog_single">
-                                        <div class="sidebar_blog_img">
-                                            <img src="../../../../public/assets/client/images/location_1.jpg" alt="blog" class="imgofluid w-100">
-                                        </div>
-                                        <div class="sidebar_blog_text">
-                                            <h5>One Thing Separates Creators From Consumers</h5>
-                                            <p><span>Jul 29 2021 </span> 2 Comment </p>
-                                        </div>
-                                    </a>
+                                    @foreach($similarListings as $similarListing)
+                                        <a href="{{ route('listing-details',$similarListing->slug) }}" class="sidebar_blog_single">
+                                            <div class="sidebar_blog_img">
+                                                <img src="{{asset('listings/'.$similarListing->image)}}"
+                                                     alt="blog" class="imgofluid w-100">
+                                            </div>
+                                            <div class="sidebar_blog_text">
+                                                <h5>{{truncate($similarListing->title)}}</h5>
+                                                <p>{!! truncate($similarListing->description,30) !!}</p>
+                                            </div>
+                                        </a>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>

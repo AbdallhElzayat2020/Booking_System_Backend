@@ -61,8 +61,6 @@
             error: function (xhr, status, error) {
                 console.log(error)
             },
-
-
         });
 
     }
