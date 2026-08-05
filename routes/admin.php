@@ -14,8 +14,8 @@ use App\Http\Controllers\Admin\{AmenityController,
     PendingListingController,
     ProfileController,
     HomeController,
-    AuthController
-};
+    AuthController,
+    SettingController};
 
 use Illuminate\Support\Facades\Route;
 
@@ -131,6 +131,10 @@ Route::group(['prefix' => 'admin',
 
         /* Packages Features Routes */
         Route::resource('package-features', PackageFeatureController::class);
+
+        /* Settings Routes */
+        Route::get('settings', [SettingController::class, 'index'])->name('settings.index');
+        Route::post('general-settings', [SettingController::class, 'update'])->name('settings.update');
 
     });
 

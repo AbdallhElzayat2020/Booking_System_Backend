@@ -29,3 +29,18 @@ if (!function_exists('truncate')) {
         return \Illuminate\Support\Str::of($text)->limit($limit);
     }
 }
+
+
+if (!function_exists('currencyPosition')) {
+    function currencyPosition(int $amount): ?string
+    {
+        if (config('settings.site_currency_position') == 'left') {
+
+            return config('settings.site_currency_icon') . $amount;
+        } elseif (config('settings.site_currency_position') == 'right') {
+            return $amount . config('settings.site_currency_icon');
+        }
+
+        return null;
+    }
+}

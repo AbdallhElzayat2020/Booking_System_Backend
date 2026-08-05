@@ -4,6 +4,7 @@ use App\Http\Controllers\Frontend\AgentListingController;
 use App\Http\Controllers\Frontend\AgentListingGalleryController;
 use App\Http\Controllers\Frontend\AgentListingScheduleController;
 use App\Http\Controllers\Frontend\AgentListingVideoGalleryController;
+use App\Http\Controllers\Frontend\checkoutController;
 use App\Http\Controllers\Frontend\DashboardController;
 use App\Http\Controllers\Frontend\ListingController;
 use App\Http\Controllers\Frontend\PackageController;
@@ -43,6 +44,9 @@ Route::get('listing-details/{slug}', [ListingController::class, 'listingDetails'
 Route::get('listing-modal/{id}', [ListingController::class, 'showModal'])->name('listing.show-modal');
 Route::get('all-listings', [ListingController::class, 'allListings'])->name('all-listings');
 Route::get('packages', [PackageController::class, 'index'])->name('packages.index');
+Route::get('checkout/{slug}/{id}', [checkoutController::class, 'index'])->name('checkout.index');
+
+
 /* --------------------- Protected Routes --------------------- */
 
 Route::group([
