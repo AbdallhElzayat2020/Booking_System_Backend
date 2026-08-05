@@ -56,7 +56,7 @@
                     <a class="nav-link" href="{{ route('all-listings') }}">listings</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="pricing.html">pricing</a>
+                    <a class="nav-link" href="{{ route('packages.index') }}">pricing</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">pages <i class="far fa-chevron-down"></i></a>

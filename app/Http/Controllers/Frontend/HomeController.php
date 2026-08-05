@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Hero;
+use App\Models\Package;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -14,10 +15,11 @@ class HomeController extends Controller
     {
         $hero = Hero::first();
         $categories = Category::active()->showAtHome()->limit(8)->get();
-
+        $packages = Package::with('features')->active()->showAtHome()->limit(3)->get();
         return view('frontend.home', [
             'hero' => $hero,
             'categories' => $categories,
+            'packages' => $packages,
         ]);
     }
 }

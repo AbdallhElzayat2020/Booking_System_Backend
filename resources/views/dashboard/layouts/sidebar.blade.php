@@ -37,6 +37,28 @@
                 </ul>
             </li>
 
+            {{--  Manage Packages Route  --}}
+            <li class="menu-header">Manage Packages</li>
+            <li class="dropdown {{setSidebarActive(['admin.packages.*'])}}">
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
+                    <i class="fas fa-columns"></i> <span>Packages</span>
+                </a>
+                <ul class="dropdown-menu">
+
+                    {{-- Package  --}}
+                    <li class="{{setSidebarActive(['admin.packages.*'])}}">
+                        <a class="nav-link " href="{{ route('admin.packages.index') }}">Packages</a>
+                    </li>
+
+                    {{-- Package Features  --}}
+                    <li class="{{setSidebarActive(['admin.package-features.*'])}}">
+                        <a class="nav-link " href="{{ route('admin.package-features.index') }}">Package Features</a>
+                    </li>
+
+
+                </ul>
+            </li>
+
             <li><a class="nav-link" href="#"><i class="far fa-square"></i> <span>Blank Page</span></a></li>
         </ul>
     </aside>

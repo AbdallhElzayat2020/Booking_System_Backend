@@ -6,6 +6,7 @@ use App\Http\Controllers\Frontend\AgentListingScheduleController;
 use App\Http\Controllers\Frontend\AgentListingVideoGalleryController;
 use App\Http\Controllers\Frontend\DashboardController;
 use App\Http\Controllers\Frontend\ListingController;
+use App\Http\Controllers\Frontend\PackageController;
 use App\Http\Controllers\Frontend\PasswordController;
 use App\Http\Controllers\Frontend\ProfileController;
 use App\Http\Controllers\Frontend\HomeController;
@@ -41,7 +42,7 @@ Route::get('listing-menu/{slug}', [ListingController::class, 'listings'])->name(
 Route::get('listing-details/{slug}', [ListingController::class, 'listingDetails'])->name('listing-details');
 Route::get('listing-modal/{id}', [ListingController::class, 'showModal'])->name('listing.show-modal');
 Route::get('all-listings', [ListingController::class, 'allListings'])->name('all-listings');
-
+Route::get('packages', [PackageController::class, 'index'])->name('packages.index');
 /* --------------------- Protected Routes --------------------- */
 
 Route::group([
@@ -92,8 +93,9 @@ Route::group([
             Route::get('/{schedule}/edit', 'edit')->name('edit');
             Route::put('/{schedule}', 'update')->name('update');
             Route::delete('/{schedule}', 'destroy')->name('destroy');
-
         });
+
+
 });
 
 

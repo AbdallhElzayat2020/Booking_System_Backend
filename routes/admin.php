@@ -1,19 +1,23 @@
 <?php
 
-use App\Http\Controllers\Admin\AmenityController;
-use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\HeroController;
-use App\Http\Controllers\Admin\ListingController;
-use App\Http\Controllers\Admin\ListingImageGalleryController;
-use App\Http\Controllers\Admin\ListingScheduleController;
-use App\Http\Controllers\Admin\ListingVideoController;
-use App\Http\Controllers\Admin\LocationController;
-use App\Http\Controllers\Admin\PasswordController;
-use App\Http\Controllers\Admin\PendingListingController;
-use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\{AmenityController,
+    CategoryController,
+    HeroController,
+    ListingController,
+    ListingImageGalleryController,
+    ListingScheduleController,
+    ListingVideoController,
+    LocationController,
+    PackageController,
+    PackageFeatureController,
+    PasswordController,
+    PendingListingController,
+    ProfileController,
+    HomeController,
+    AuthController
+};
+
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\HomeController;
-use App\Http\Controllers\Admin\AuthController;
 
 
 /* --------------------- public Routes --------------------- */
@@ -99,6 +103,7 @@ Route::group(['prefix' => 'admin',
             ->name('listings.videos-gallery.destroy');
 
 
+        /* Listing schedules Routes */
         Route::prefix('listings/{listing}/schedules')
             ->name('listings.schedules.')
             ->controller(ListingScheduleController::class)
@@ -112,6 +117,20 @@ Route::group(['prefix' => 'admin',
                 Route::delete('/{schedule}', 'destroy')->name('destroy');
 
             });
+
+
+        Route::get('package/{package}/features', [PackageFeatureController::class, 'packageFeatures'])
+            ->name('package.features');
+
+        Route::get('package/{package}/features/create', [PackageFeatureController::class, 'createForPackage'])
+            ->name('packages.features.create');
+
+
+        /* packages Routes */
+        Route::resource('packages', PackageController::class);
+
+        /* Packages Features Routes */
+        Route::resource('package-features', PackageFeatureController::class);
 
     });
 
