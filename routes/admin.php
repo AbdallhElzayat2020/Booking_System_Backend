@@ -11,11 +11,13 @@ use App\Http\Controllers\Admin\{AmenityController,
     PackageController,
     PackageFeatureController,
     PasswordController,
+    PaymentSettingController,
     PendingListingController,
     ProfileController,
     HomeController,
     AuthController,
-    SettingController};
+    SettingController
+};
 
 use Illuminate\Support\Facades\Route;
 
@@ -135,6 +137,11 @@ Route::group(['prefix' => 'admin',
         /* Settings Routes */
         Route::get('settings', [SettingController::class, 'index'])->name('settings.index');
         Route::post('general-settings', [SettingController::class, 'update'])->name('settings.update');
+
+        /* Payment Settings Routes */
+        Route::get('payment-settings', [PaymentSettingController::class, 'index'])->name('payment-settings.index');
+        Route::post('payment-settings', [PaymentSettingController::class, 'update'])->name('payment-settings.update');
+
 
     });
 
