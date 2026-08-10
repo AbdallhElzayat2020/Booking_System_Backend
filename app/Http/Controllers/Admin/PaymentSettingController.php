@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UpdatePaymentSettingRequest;
 use App\Models\PaymentSetting;
+use App\Services\PaymentSettingService;
 use Illuminate\Http\Request;
 
 class PaymentSettingController extends Controller
@@ -25,7 +26,7 @@ class PaymentSettingController extends Controller
         return view('dashboard.PaymentSetting.index');
     }
 
-    public function update(UpdatePaymentSettingRequest $request)
+    public function update(UpdatePaymentSettingRequest $request, PaymentSettingService $paymentSettingService)
     {
 
         foreach ($request->validated() as $key => $value) {
@@ -34,6 +35,8 @@ class PaymentSettingController extends Controller
                 ['value' => $value]
             );
         }
+
+        $paymentSettingService->clearCachedSettings();
 
         return redirect()->back()->with('success', 'updated successfully.');
     }

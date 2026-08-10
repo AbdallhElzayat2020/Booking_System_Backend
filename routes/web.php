@@ -9,6 +9,7 @@ use App\Http\Controllers\Frontend\DashboardController;
 use App\Http\Controllers\Frontend\ListingController;
 use App\Http\Controllers\Frontend\PackageController;
 use App\Http\Controllers\Frontend\PasswordController;
+use App\Http\Controllers\Frontend\PaymentController;
 use App\Http\Controllers\Frontend\ProfileController;
 use App\Http\Controllers\Frontend\HomeController;
 use Illuminate\Support\Facades\Route;
@@ -102,20 +103,15 @@ Route::group([
 
 });
 
+/* Payment Routes */
+Route::group(['middleware' => 'auth'], function () {
 
-//Route::get('/dashboard', function () {
-//    return view('dashboard');
-//})->middleware(['auth', 'verified'])->name('dashboard');
+    Route::get('paypal/payment', [PaymentController::class, 'payWithPaypal'])->name('paypal.payment.index');
+    Route::get('paypal/success', [PaymentController::class, 'paypalSuccess'])->name('paypal.payment.success');
+    Route::get('paypal/cancel', [PaymentController::class, 'paypalCancel'])->name('paypal.payment.cancel');
 
-//Route::middleware('auth')->group(function () {
-//    Route::get('/profile', [ProfileController::class, 'edit'])
-//        ->name('profile.edit');
-//
-//    Route::patch('/profile', [ProfileController::class, 'update'])
-//        ->name('profile.update');
-//
-//    Route::delete('/profile', [ProfileController::class, 'destroy'])
-//        ->name('profile.destroy');
-//});
+
+});
+
 
 require __DIR__ . '/auth.php';

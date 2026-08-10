@@ -35,14 +35,19 @@
                 <div class="col-lg-8">
                     <div class="wsus__payment_area">
                         <div class="row">
+
+
+                            @if(config('payment.paypal_status'))
+                                <div class="col-lg-3 col-6 col-sm-4">
+                                    <a class="wsus__single_payment"
+                                       href="{{ route('paypal.payment.index') }}">
+                                        <img src="{{asset('assets/client/images/pay_1.jpg')}}" alt="payment method" class="img-fluid w-100">
+                                    </a>
+                                </div>
+                            @endif
+
                             <div class="col-lg-3 col-6 col-sm-4">
-                                <a class="wsus__single_payment" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                   href="#">
-                                    <img src="../../../../public/assets/client/images/pay_1.jpg" alt="payment method" class="img-fluid w-100">
-                                </a>
-                            </div>
-                            <div class="col-lg-3 col-6 col-sm-4">
-                                <a class="wsus__single_payment" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                <a class="wsus__single_payment"
                                    href="#">
                                     <img src="../../../../public/assets/client/images/pay_2.jpg" alt="payment method" class="img-fluid w-100">
                                 </a>
@@ -53,13 +58,6 @@
                                     <img src="../../../../public/assets/client/images/pay_3.jpg" alt="payment method" class="img-fluid w-100">
                                 </a>
                             </div>
-                            <div class="col-lg-3 col-6 col-sm-4">
-                                <a class="wsus__single_payment" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                   href="#">
-                                    <img src="../../../../public/assets/client/images/pay_4.jpg" alt="payment method" class="img-fluid w-100">
-                                </a>
-                            </div>
-
                         </div>
                     </div>
                 </div>
@@ -78,7 +76,7 @@
                         @foreach ($package->features as $feature)
                             <p>{{ $feature->feature }}</p>
                         @endforeach
-                        <a href="#">Order now</a>
+                        <a href="{{ route('paypal.payment.index') }}">Order now</a>
                     </div>
                 </div>
             </div>
@@ -97,7 +95,7 @@
                             <ul>
                                 <li>Natus hic assumenda consequatur excepturi ducimu.</li>
                                 <li>Cumque rerum dolor impedit exercitationem Eveniet.</li>
-                                <li>Dolor sit amet consectetur adipisicing elit tempora cum </li>
+                                <li>Dolor sit amet consectetur adipisicing elit tempora cum</li>
                             </ul>
                             <form>
                                 <input type="text" placeholder="Enteer Something">
