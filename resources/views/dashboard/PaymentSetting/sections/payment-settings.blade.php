@@ -71,7 +71,7 @@
                     </div>
 
                     {{-- Paypal Currency Rate --}}
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="form-group">
                             <label for="paypal_currency_rate">Paypal Currency Rate (Per {{ config('settings.site_default_currency') }})</label>
                             <input type="text" class="form-control"
@@ -84,7 +84,7 @@
                     </div>
 
                     {{-- Paypal Client ID --}}
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="form-group">
                             <label for="paypal_client_id">Paypal Client ID</label>
                             <input type="text" class="form-control"
@@ -97,7 +97,7 @@
                     </div>
 
                     {{-- Paypal Secret Key --}}
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="form-group">
                             <label for="paypal_secret_key">Paypal Secret Key</label>
                             <input type="text" class="form-control"
@@ -110,7 +110,7 @@
                     </div>
 
                     {{-- Paypal App Key --}}
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="form-group">
                             <label for="paypal_app_key">Paypal App Key</label>
                             <input type="text" class="form-control"
