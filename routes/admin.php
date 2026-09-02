@@ -140,8 +140,11 @@ Route::group(['prefix' => 'admin',
 
         /* Payment Settings Routes */
         Route::get('payment-settings', [PaymentSettingController::class, 'index'])->name('payment-settings.index');
+
         Route::post('payment-settings', [PaymentSettingController::class, 'update'])->name('payment-settings.update');
 
+        /* Stripe Settings Routes */
+        Route::post('stripe-settings', [PaymentSettingController::class, 'stripeSetting'])->name('stripe-settings.update');
 
     });
 

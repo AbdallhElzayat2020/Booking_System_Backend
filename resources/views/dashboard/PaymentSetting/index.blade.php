@@ -22,7 +22,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Update Payment Settings</h4>
+                            <h4>Update Payment Setting</h4>
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -31,12 +31,14 @@
                                         <li class="nav-item">
                                             <a class="nav-link active" id="home-tab4" data-toggle="tab" href="#home4"
                                                role="tab" aria-controls="home" aria-selected="true">
-                                                Paypal Settings
+                                                Paypal Setting
                                             </a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" id="profile-tab4" data-toggle="tab" href="#profile4"
-                                               role="tab" aria-controls="profile" aria-selected="false">Profile</a>
+                                               role="tab" aria-controls="profile" aria-selected="false">
+                                                Stripe Setting
+                                            </a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" id="contact-tab4" data-toggle="tab" href="#contact4"
@@ -47,18 +49,9 @@
                                 <div class="col-12 col-sm-12 col-md-10">
                                     <div class="tab-content no-padding" id="myTab2Content">
 
-                                        @include('dashboard.PaymentSetting.sections.payment-settings')
+                                        @include('dashboard.PaymentSetting.sections.paypal-settings')
 
-                                        <div class="tab-pane fade" id="profile4" role="tabpanel"
-                                             aria-labelledby="profile-tab4">
-                                            Sed sed metus vel lacus hendrerit tempus. Sed efficitur velit tortor, ac
-                                            efficitur est lobortis quis. Nullam lacinia metus erat, sed fermentum justo
-                                            rutrum ultrices. Proin quis iaculis tellus. Etiam ac vehicula eros, pharetra
-                                            consectetur dui.
-                                            Aliquam convallis neque eget tellus efficitur, eget maximus massa imperdiet.
-                                            Morbi a mattis velit. Donec hendrerit venenatis justo, eget scelerisque tellus
-                                            pharetra a.
-                                        </div>
+                                        @include('dashboard.PaymentSetting.sections.stripe-settings')
 
                                         <div class="tab-pane fade" id="contact4" role="tabpanel"
                                              aria-labelledby="contact-tab4">
@@ -80,3 +73,27 @@
         </div>
     </section>
 @endsection
+
+@push('js')
+    <script>
+        $(document).ready(function() {
+            // Store active tab on tab change and adjust select2 if needed
+            $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
+                var target = $(e.target).attr('href');
+                sessionStorage.setItem('payment_setting_active_tab', target);
+
+                if (jQuery().select2) {
+                    $('.select2').select2({
+                        width: '100%'
+                    });
+                }
+            });
+
+            // Restore active tab if previously saved
+            var activeTab = sessionStorage.getItem('payment_setting_active_tab');
+            if (activeTab && $(activeTab).length) {
+                $('#myTab4 a[href="' + activeTab + '"]').tab('show');
+            }
+        });
+    </script>
+@endpush
