@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\{AmenityController,
     ListingScheduleController,
     ListingVideoController,
     LocationController,
+    OrderController,
     PackageController,
     PackageFeatureController,
     PasswordController,
@@ -16,8 +17,7 @@ use App\Http\Controllers\Admin\{AmenityController,
     ProfileController,
     HomeController,
     AuthController,
-    SettingController
-};
+    SettingController};
 
 use Illuminate\Support\Facades\Route;
 
@@ -133,6 +133,11 @@ Route::group(['prefix' => 'admin',
 
         /* Packages Features Routes */
         Route::resource('package-features', PackageFeatureController::class);
+
+        /* Orders Routes */
+
+        Route::resource('orders', OrderController::class);
+
 
         /* Settings Routes */
         Route::get('settings', [SettingController::class, 'index'])->name('settings.index');

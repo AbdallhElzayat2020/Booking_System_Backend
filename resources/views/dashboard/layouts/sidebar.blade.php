@@ -46,7 +46,7 @@
                 <ul class="dropdown-menu">
 
                     {{-- Package  --}}
-                    <li class="{{setSidebarActive(['admin.packages.*'])}}">
+                    <li class="{{setSidebarActive(['admin.packages.*','admin.payment-settings.*'])}}">
                         <a class="nav-link " href="{{ route('admin.packages.index') }}">Packages</a>
                     </li>
 
@@ -55,12 +55,19 @@
                         <a class="nav-link " href="{{ route('admin.package-features.index') }}">Package Features</a>
                     </li>
 
+                    {{-- payment settings  --}}
+                    <li class="{{setSidebarActive(['admin.payment-settings.*'])}}">
+                        <a class="nav-link " href="{{ route('admin.payment-settings.index') }}">Payment Settings</a>
+                    </li>
 
                 </ul>
             </li>
 
+            {{--  Order Routes--}}
+            <li><a class="nav-link" href="{{ route('admin.orders.index') }}"><i class="far fa-square"></i> <span>Orders</span></a></li>
+
+
             <li><a class="nav-link" href="{{ route('admin.settings.index') }}"><i class="far fa-square"></i> <span>Settings</span></a></li>
-            <li><a class="nav-link" href="{{ route('admin.payment-settings.index') }}"><i class="far fa-square"></i> <span>Payment Settings</span></a></li>
 
         </ul>
     </aside>
