@@ -7,6 +7,7 @@ use App\Http\Controllers\Frontend\AgentListingVideoGalleryController;
 use App\Http\Controllers\Frontend\checkoutController;
 use App\Http\Controllers\Frontend\DashboardController;
 use App\Http\Controllers\Frontend\ListingController;
+use App\Http\Controllers\Frontend\OrderController;
 use App\Http\Controllers\Frontend\PackageController;
 use App\Http\Controllers\Frontend\PasswordController;
 use App\Http\Controllers\Frontend\PaymentController;
@@ -100,7 +101,9 @@ Route::group([
             Route::delete('/{schedule}', 'destroy')->name('destroy');
         });
 
-
+    /* User Orders Routes */
+    Route::get('orders', [OrderController::class, 'index'])->name('orders.index');
+    Route::get('orders/{order}', [OrderController::class, 'show'])->name('orders.show');
 });
 
 /* Payment Routes */
