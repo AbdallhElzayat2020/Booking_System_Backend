@@ -58,7 +58,6 @@ class UpdateAgentListingRequest extends FormRequest
             'amenities.*' => ['exists:amenities,id'],
             'expired_date' => ['required', 'date'],
             'status' => ['required', 'string', 'in:active,inactive'],
-            'is_verified' => ['required', 'in:yes,no'],
             'is_featured' => ['required', 'in:yes,no'],
             'seo_title' => ['nullable', 'string', 'max:255'],
             'seo_description' => ['nullable', 'string', 'max:255'],

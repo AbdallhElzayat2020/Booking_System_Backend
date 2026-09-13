@@ -39,7 +39,6 @@ class UserOrderDataTable extends DataTable
             })
             ->addColumn('created_at', function ($order) {
                 return $order->created_at->format('d m Y');
-//                return $order->created_at->diffForHumans();
             })
             ->addColumn('payment_status', function ($order) {
                 return view('frontend.dashboard.order.datatable.payment_status', ['order' => $order]);

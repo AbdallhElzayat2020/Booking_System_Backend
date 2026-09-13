@@ -71,6 +71,20 @@ class OrderController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+
+        try {
+            $order = Order::findOrFail($id);
+            $order->subscription()->delete();
+            $order->delete();
+            return to_route('admin.orders.index')->with('success', 'Order deleted successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Failed to delete order: ' . $e->getMessage());
+        }
+
     }
 }
+
+/*
+ * Failed to delete order: SQLSTATE[23000]: Integrity constraint violation: 1451 Cannot delete or update a parent row: a foreign key constraint fails (`youtube_booking_app`.`subscriptions`, CONSTRAINT `subscriptions_order_id_foreign` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`)) (Connection: mysql, SQL: delete from `orders` where `id` = 10)
+ *
+ * */

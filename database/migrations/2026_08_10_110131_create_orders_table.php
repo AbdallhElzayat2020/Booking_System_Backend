@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->string('order_id');
             $table->string('transaction_id');
             $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('package_id')->constrained('packages');
+            $table->foreignId('package_id')->constrained('packages')->cascadeOnDelete();
 
             $table->string('payment_method');
             $table->enum('payment_status', ['pending', 'completed', 'failed']);
@@ -27,8 +27,6 @@ return new class extends Migration {
             $table->string('paid_currency');
 
             $table->timestamp('purchase_date');
-
-
             $table->timestamps();
         });
     }

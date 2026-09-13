@@ -15,6 +15,28 @@
                                     <h4 class="mb-0 fs-5 text-white"><i class="fas fa-plus-circle me-2"></i>Create New Listing</h4>
                                 </div>
                                 <div class="card-body">
+
+                                    {{--  errors  --}}
+
+                                    @if($errors->has('listing'))
+                                        <div class="alert alert-danger d-flex align-items-center" role="alert">
+                                            <i class="fas fa-exclamation-circle me-2"></i>
+                                            {{ $errors->first('listing') }}
+                                        </div>
+                                    @endif
+
+                                    {{--  Genral Error Messages --}}
+                                    @if($errors->any() && !$errors->has('listing'))
+                                        <div class="alert alert-danger">
+                                            <ul class="mb-0">
+                                                @foreach($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
+
+
                                     <form action="{{ route('user.listings.store') }}" method="post" enctype="multipart/form-data">
                                         @csrf
 
@@ -105,6 +127,9 @@
                                                     @enderror
                                                 </div>
                                             </div>
+
+                                            {{-- Max Listings Rule --}}
+                                            <input type="hidden" name="listing" value="'inactive">
 
                                             {{-- Description --}}
                                             <div class="col-12">
@@ -308,7 +333,7 @@
                                                 <div class="row g-3">
 
                                                     {{-- Expired Date --}}
-                                                    <div class="col-md-3">
+                                                    <div class="col-md-4">
                                                         <div class="form-group">
                                                             <label class="form-label fw-semibold">Expired Date <span class="text-danger">*</span></label>
                                                             <input type="date" name="expired_date"
@@ -321,7 +346,7 @@
                                                     </div>
 
                                                     {{-- Status --}}
-                                                    <div class="col-md-3">
+                                                    <div class="col-md-4">
                                                         <div class="form-group">
                                                             <label class="form-label fw-semibold">Status <span class="text-danger">*</span></label>
                                                             <select name="status" class="form-select @error('status') is-invalid @enderror">
@@ -334,22 +359,9 @@
                                                         </div>
                                                     </div>
 
-                                                    {{-- Verified --}}
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label class="form-label fw-semibold">Verified <span class="text-danger">*</span></label>
-                                                            <select name="is_verified" class="form-select @error('is_verified') is-invalid @enderror">
-                                                                <option value="no" @selected(old('is_verified') == 'no')>No</option>
-                                                                <option value="yes" @selected(old('is_verified') == 'yes')>Yes</option>
-                                                            </select>
-                                                            @error('is_verified')
-                                                            <div class="invalid-feedback">{{ $message }}</div>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
 
                                                     {{-- Featured --}}
-                                                    <div class="col-md-3">
+                                                    <div class="col-md-4">
                                                         <div class="form-group">
                                                             <label class="form-label fw-semibold">Featured <span class="text-danger">*</span></label>
                                                             <select name="is_featured" class="form-select @error('is_featured') is-invalid @enderror">

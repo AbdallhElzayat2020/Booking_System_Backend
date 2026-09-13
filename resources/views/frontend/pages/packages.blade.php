@@ -47,12 +47,37 @@
                                         @else
                                             <span>/ {{ $package->number_of_days }} Days</span>
                                         @endif
-
                                     </h5>
 
-                                    @foreach ($package->features as $feature)
-                                        <p>{{ $feature->feature }}</p>
-                                    @endforeach
+                                    @if ($package->number_of_listings === -1)
+                                        <p>Unlimited Listings Submition</p>
+                                    @else
+                                        <p>{{ $package->number_of_listings }} Listings Submition</p>
+                                    @endif
+
+                                    @if ($package->number_of_amenities === -1)
+                                        <p>Unlimited Listing Aminities</p>
+                                    @else
+                                        <p>{{ $package->number_of_amenities }} Listing Aminities</p>
+                                    @endif
+
+                                    @if ($package->number_of_photos === -1)
+                                        <p>Unlimited Listing Photos</p>
+                                    @else
+                                        <p>{{ $package->number_of_photos }} Listing Photos</p>
+                                    @endif
+
+                                    @if ($package->number_of_videos === -1)
+                                        <p>Unlimited Listing Videos</p>
+                                    @else
+                                        <p>{{ $package->number_of_videos }} Listing Videos</p>
+                                    @endif
+
+                                    @if ($package->number_of_featured_listings === -1)
+                                        <p>Unlimited Featured Listing</p>
+                                    @else
+                                        <p>{{ $package->number_of_featured_listings }} Featured Listing</p>
+                                    @endif
 
                                     <a href="{{ route('checkout.index',[ $package->slug,  $package->id]) }}">Order now</a>
                                 </div>
