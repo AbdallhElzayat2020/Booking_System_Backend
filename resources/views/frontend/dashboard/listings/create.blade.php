@@ -11,33 +11,53 @@
                     <div class="dashboard_content">
                         <div class="my_listing">
                             <div class="card shadow-sm border-0">
-                                <div class="card-header bg-secondary  text-white py-3">
-                                    <h4 class="mb-0 fs-5 text-white"><i class="fas fa-plus-circle me-2"></i>Create New Listing</h4>
+                                <div class="card-header bg-secondary text-white py-3">
+                                    <h4 class="mb-0 fs-5 text-white">
+                                        <i class="fas fa-plus-circle me-2"></i>Create New Listing
+                                    </h4>
                                 </div>
                                 <div class="card-body">
 
-                                    {{--  errors  --}}
-
-                                    @if($errors->has('listing'))
+                                    {{-- =====  Listings ===== --}}
+                                    @if ($errors->has('listing'))
                                         <div class="alert alert-danger d-flex align-items-center" role="alert">
-                                            <i class="fas fa-exclamation-circle me-2"></i>
-                                            {{ $errors->first('listing') }}
+
+                                            <ul>
+                                                <li>
+                                                    <i class="fas fa-exclamation-circle me-2"></i>{{ $errors->first('listing') }}
+                                                </li>
+                                                <li>
+                                                    <i class="fas fa-exclamation-circle me-2"></i>{{ $errors->first('amenities') }}
+                                                </li>
+                                                <li>
+                                                    <i class="fas fa-exclamation-circle me-2"></i>{{ $errors->first('is_featured') }}
+                                                </li>
+                                            </ul>
+                                            <div></div>
                                         </div>
                                     @endif
 
-                                    {{--  Genral Error Messages --}}
-                                    @if($errors->any() && !$errors->has('listing'))
+                                    {{-- ===== success messages ===== --}}
+                                    @if (session('success'))
+                                        <div class="alert alert-success d-flex align-items-center" role="alert">
+                                            <i class="fas fa-check-circle me-2"></i>
+                                            <div>{{ session('success') }}</div>
+                                        </div>
+                                    @endif
+
+                                    {{-- ===== General Error Messages ===== --}}
+                                    @if ($errors->any() && !$errors->has('listing'))
                                         <div class="alert alert-danger">
-                                            <ul class="mb-0">
-                                                @foreach($errors->all() as $error)
+                                            <ul class="mb-0 ps-3">
+                                                @foreach ($errors->all() as $error)
                                                     <li>{{ $error }}</li>
                                                 @endforeach
                                             </ul>
                                         </div>
                                     @endif
 
-
-                                    <form action="{{ route('user.listings.store') }}" method="post" enctype="multipart/form-data">
+                                    <form action="{{ route('user.listings.store') }}" method="post"
+                                          enctype="multipart/form-data">
                                         @csrf
 
                                         <div class="row g-3">
@@ -49,7 +69,8 @@
                                                     {{-- Main Image --}}
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label class="form-label fw-semibold">Main Image <span class="text-danger">*</span></label>
+                                                            <label class="form-label fw-semibold">Main Image <span
+                                                                    class="text-danger">*</span></label>
                                                             <input type="file" name="image"
                                                                    class="form-control @error('image') is-invalid @enderror"
                                                                    accept="image/*">
@@ -63,7 +84,8 @@
                                                     {{-- Thumbnail Image --}}
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label class="form-label fw-semibold">Thumbnail Image <span class="text-danger">*</span></label>
+                                                            <label class="form-label fw-semibold">Thumbnail Image <span
+                                                                    class="text-danger">*</span></label>
                                                             <input type="file" name="thumbnail_image"
                                                                    class="form-control @error('thumbnail_image') is-invalid @enderror"
                                                                    accept="image/*">
@@ -80,11 +102,14 @@
                                             {{-- Category --}}
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label class="form-label fw-semibold">Category <span class="text-danger">*</span></label>
-                                                    <select name="category_id" class="form-select @error('category_id') is-invalid @enderror">
+                                                    <label class="form-label fw-semibold">Category <span
+                                                            class="text-danger">*</span></label>
+                                                    <select name="category_id"
+                                                            class="form-select @error('category_id') is-invalid @enderror">
                                                         <option value="">Select Category</option>
-                                                        @foreach($categories as $category)
-                                                            <option value="{{ $category->id }}" @selected(old('category_id') == $category->id)>
+                                                        @foreach ($categories as $category)
+                                                            <option value="{{ $category->id }}"
+                                                                @selected(old('category_id') == $category->id)>
                                                                 {{ $category->title }}
                                                             </option>
                                                         @endforeach
@@ -98,11 +123,14 @@
                                             {{-- Location --}}
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label class="form-label fw-semibold">Location <span class="text-danger">*</span></label>
-                                                    <select name="location_id" class="form-select @error('location_id') is-invalid @enderror">
+                                                    <label class="form-label fw-semibold">Location <span
+                                                            class="text-danger">*</span></label>
+                                                    <select name="location_id"
+                                                            class="form-select @error('location_id') is-invalid @enderror">
                                                         <option value="">Select Location</option>
-                                                        @foreach($locations as $location)
-                                                            <option value="{{ $location->id }}" @selected(old('location_id') == $location->id)>
+                                                        @foreach ($locations as $location)
+                                                            <option value="{{ $location->id }}"
+                                                                @selected(old('location_id') == $location->id)>
                                                                 {{ $location->title }}
                                                             </option>
                                                         @endforeach
@@ -116,27 +144,27 @@
                                             {{-- Title --}}
                                             <div class="col-12">
                                                 <div class="form-group">
-                                                    <label class="form-label fw-semibold">Title <span class="text-danger">*</span></label>
-                                                    <input type="text"
-                                                           name="title"
+                                                    <label class="form-label fw-semibold">Title <span
+                                                            class="text-danger">*</span></label>
+                                                    <input type="text" name="title"
                                                            class="form-control @error('title') is-invalid @enderror"
-                                                           placeholder="Enter listing title"
-                                                           value="{{ old('title') }}">
+                                                           placeholder="Enter listing title" value="{{ old('title') }}">
                                                     @error('title')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
                                                 </div>
                                             </div>
 
-                                            {{-- Max Listings Rule --}}
-                                            <input type="hidden" name="listing" value="'inactive">
+                                            {{-- MaxListings Rule --}}
+                                            <input type="hidden" name="listing" value="inactive">
 
                                             {{-- Description --}}
                                             <div class="col-12">
                                                 <div class="form-group">
-                                                    <label class="form-label fw-semibold">Description <span class="text-danger">*</span></label>
-                                                    <textarea name="description" id="summernote" rows="6" class="form-control summernote @error('description') is-invalid @enderror"
-                                                              placeholder="Enter detailed description">{{ old('description') }}</textarea>
+                                                    <label class="form-label fw-semibold">Description <span
+                                                            class="text-danger">*</span></label>
+                                                    <textarea name="description" id="summernote" rows="6"
+                                                              class="form-control summernote @error('description') is-invalid @enderror" placeholder="Enter detailed description">{{ old('description') }}</textarea>
                                                     @error('description')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
@@ -151,9 +179,9 @@
                                                     {{-- Phone --}}
                                                     <div class="col-md-4">
                                                         <div class="form-group">
-                                                            <label class="form-label fw-semibold">Phone <span class="text-danger">*</span></label>
-                                                            <input type="text"
-                                                                   name="phone"
+                                                            <label class="form-label fw-semibold">Phone <span
+                                                                    class="text-danger">*</span></label>
+                                                            <input type="text" name="phone"
                                                                    class="form-control @error('phone') is-invalid @enderror"
                                                                    placeholder="Enter phone number"
                                                                    value="{{ old('phone') }}">
@@ -166,9 +194,9 @@
                                                     {{-- Email --}}
                                                     <div class="col-md-4">
                                                         <div class="form-group">
-                                                            <label class="form-label fw-semibold">Email <span class="text-danger">*</span></label>
-                                                            <input type="email"
-                                                                   name="email"
+                                                            <label class="form-label fw-semibold">Email <span
+                                                                    class="text-danger">*</span></label>
+                                                            <input type="email" name="email"
                                                                    class="form-control @error('email') is-invalid @enderror"
                                                                    placeholder="Enter email address"
                                                                    value="{{ old('email') }}">
@@ -182,8 +210,7 @@
                                                     <div class="col-md-4">
                                                         <div class="form-group">
                                                             <label class="form-label fw-semibold">Website</label>
-                                                            <input type="url"
-                                                                   name="website"
+                                                            <input type="url" name="website"
                                                                    class="form-control @error('website') is-invalid @enderror"
                                                                    placeholder="https://example.com"
                                                                    value="{{ old('website') }}">
@@ -199,7 +226,8 @@
                                             {{-- Address --}}
                                             <div class="col-12">
                                                 <div class="form-group">
-                                                    <label class="form-label fw-semibold">Address <span class="text-danger">*</span></label>
+                                                    <label class="form-label fw-semibold">Address <span
+                                                            class="text-danger">*</span></label>
                                                     <textarea name="address" rows="2" class="form-control @error('address') is-invalid @enderror"
                                                               placeholder="Enter full address">{{ old('address') }}</textarea>
                                                     @error('address')
@@ -216,7 +244,8 @@
                                                     {{-- Facebook Link --}}
                                                     <div class="col-md-4">
                                                         <div class="form-group">
-                                                            <label class="form-label"><i class="fab fa-facebook text-primary me-1"></i>Facebook</label>
+                                                            <label class="form-label"><i
+                                                                    class="fab fa-facebook text-primary me-1"></i>Facebook</label>
                                                             <input type="url" name="facebook_link"
                                                                    class="form-control @error('facebook_link') is-invalid @enderror"
                                                                    placeholder="https://facebook.com/..."
@@ -230,7 +259,9 @@
                                                     {{-- X (Twitter) Link --}}
                                                     <div class="col-md-4">
                                                         <div class="form-group">
-                                                            <label class="form-label"><i class="fab fa-x-twitter text-dark me-1"></i>X (Twitter)</label>
+                                                            <label class="form-label"><i
+                                                                    class="fab fa-x-twitter text-dark me-1"></i>X
+                                                                (Twitter)</label>
                                                             <input type="url" name="x_link"
                                                                    class="form-control @error('x_link') is-invalid @enderror"
                                                                    placeholder="https://x.com/..."
@@ -244,7 +275,8 @@
                                                     {{-- Instagram Link --}}
                                                     <div class="col-md-4">
                                                         <div class="form-group">
-                                                            <label class="form-label"><i class="fab fa-instagram text-danger me-1"></i>Instagram</label>
+                                                            <label class="form-label"><i
+                                                                    class="fab fa-instagram text-danger me-1"></i>Instagram</label>
                                                             <input type="url" name="instagram_link"
                                                                    class="form-control @error('instagram_link') is-invalid @enderror"
                                                                    placeholder="https://instagram.com/..."
@@ -258,7 +290,8 @@
                                                     {{-- LinkedIn Link --}}
                                                     <div class="col-md-4">
                                                         <div class="form-group">
-                                                            <label class="form-label"><i class="fab fa-linkedin text-primary me-1"></i>LinkedIn</label>
+                                                            <label class="form-label"><i
+                                                                    class="fab fa-linkedin text-primary me-1"></i>LinkedIn</label>
                                                             <input type="url" name="linkedin_link"
                                                                    class="form-control @error('linkedin_link') is-invalid @enderror"
                                                                    placeholder="https://linkedin.com/..."
@@ -272,7 +305,8 @@
                                                     {{-- WhatsApp Link --}}
                                                     <div class="col-md-4">
                                                         <div class="form-group">
-                                                            <label class="form-label"><i class="fab fa-whatsapp text-success me-1"></i>WhatsApp</label>
+                                                            <label class="form-label"><i
+                                                                    class="fab fa-whatsapp text-success me-1"></i>WhatsApp</label>
                                                             <input type="url" name="whatsapp_link"
                                                                    class="form-control @error('whatsapp_link') is-invalid @enderror"
                                                                    placeholder="https://wa.me/..."
@@ -286,8 +320,11 @@
                                                     {{-- Google Map Embed Code --}}
                                                     <div class="col-md-4">
                                                         <div class="form-group">
-                                                            <label class="form-label"><i class="fas fa-map-marker-alt text-danger me-1"></i>Google Map</label>
-                                                            <textarea name="google_map_embed_code" rows="2" class="form-control @error('google_map_embed_code') is-invalid @enderror"
+                                                            <label class="form-label"><i
+                                                                    class="fas fa-map-marker-alt text-danger me-1"></i>Google
+                                                                Map</label>
+                                                            <textarea name="google_map_embed_code" rows="2"
+                                                                      class="form-control @error('google_map_embed_code') is-invalid @enderror"
                                                                       placeholder="<iframe src='...'></iframe>">{{ old('google_map_embed_code') }}</textarea>
                                                             @error('google_map_embed_code')
                                                             <div class="invalid-feedback">{{ $message }}</div>
@@ -302,7 +339,8 @@
                                             <div class="col-12">
                                                 <div class="form-group">
                                                     <label class="form-label fw-semibold">Attachment File</label>
-                                                    <input type="file" name="attachments" class="form-control @error('attachments') is-invalid @enderror">
+                                                    <input type="file" name="attachments"
+                                                           class="form-control @error('attachments') is-invalid @enderror">
                                                     @error('attachments')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
@@ -312,10 +350,19 @@
                                             {{-- Amenities Section --}}
                                             <div class="col-12">
                                                 <div class="form-group">
-                                                    <label class="form-label fw-semibold">Amenities</label>
-                                                    <select class="form-select select2 @error('amenities') is-invalid @enderror" multiple name="amenities[]">
-                                                        @foreach($amenities as $amenity)
-                                                            <option value="{{ $amenity->id }}" @selected(in_array($amenity->id, old('amenities', [])))>
+                                                    <label class="form-label fw-semibold">
+                                                        <code>Maximum Amenities
+                                                            {{ $subscription->package->number_of_amenities == -1
+                                                                ? 'Unlimited'
+                                                                : $subscription->package->number_of_amenities }}
+                                                        </code>
+                                                    </label>
+                                                    <select
+                                                        class="form-select select2 @error('amenities') is-invalid @enderror"
+                                                        multiple name="amenities[]">
+                                                        @foreach ($amenities as $amenity)
+                                                            <option value="{{ $amenity->id }}"
+                                                                @selected(in_array($amenity->id, old('amenities', [])))>
                                                                 {{ $amenity->title }}
                                                             </option>
                                                         @endforeach
@@ -335,7 +382,8 @@
                                                     {{-- Expired Date --}}
                                                     <div class="col-md-4">
                                                         <div class="form-group">
-                                                            <label class="form-label fw-semibold">Expired Date <span class="text-danger">*</span></label>
+                                                            <label class="form-label fw-semibold">Expired Date <span
+                                                                    class="text-danger">*</span></label>
                                                             <input type="date" name="expired_date"
                                                                    class="form-control @error('expired_date') is-invalid @enderror"
                                                                    value="{{ old('expired_date') }}">
@@ -348,10 +396,15 @@
                                                     {{-- Status --}}
                                                     <div class="col-md-4">
                                                         <div class="form-group">
-                                                            <label class="form-label fw-semibold">Status <span class="text-danger">*</span></label>
-                                                            <select name="status" class="form-select @error('status') is-invalid @enderror">
-                                                                <option value="active" @selected(old('status') == 'active')>Active</option>
-                                                                <option value="inactive" @selected(old('status') == 'inactive')>Inactive</option>
+                                                            <label class="form-label fw-semibold">Status <span
+                                                                    class="text-danger">*</span></label>
+                                                            <select name="status"
+                                                                    class="form-select @error('status') is-invalid @enderror">
+                                                                <option value="active" @selected(old('status') == 'active')>Active
+                                                                </option>
+                                                                <option value="inactive" @selected(old('status') == 'inactive')>
+                                                                    Inactive
+                                                                </option>
                                                             </select>
                                                             @error('status')
                                                             <div class="invalid-feedback">{{ $message }}</div>
@@ -359,14 +412,17 @@
                                                         </div>
                                                     </div>
 
-
                                                     {{-- Featured --}}
                                                     <div class="col-md-4">
                                                         <div class="form-group">
-                                                            <label class="form-label fw-semibold">Featured <span class="text-danger">*</span></label>
-                                                            <select name="is_featured" class="form-select @error('is_featured') is-invalid @enderror">
-                                                                <option value="no" @selected(old('is_featured') == 'no')>No</option>
-                                                                <option value="yes" @selected(old('is_featured') == 'yes')>Yes</option>
+                                                            <label class="form-label fw-semibold">Featured <span
+                                                                    class="text-danger">*</span></label>
+                                                            <select name="is_featured"
+                                                                    class="form-select @error('is_featured') is-invalid @enderror">
+                                                                <option value="no" @selected(old('is_featured') == 'no')>No
+                                                                </option>
+                                                                <option value="yes" @selected(old('is_featured') == 'yes')>Yes
+                                                                </option>
                                                             </select>
                                                             @error('is_featured')
                                                             <div class="invalid-feedback">{{ $message }}</div>
@@ -399,7 +455,7 @@
                                                         <div class="form-group">
                                                             <label class="form-label fw-semibold">SEO Description</label>
                                                             <input type="text" name="seo_description"
-                                                                   class="form-control  @error('seo_description') is-invalid @enderror"
+                                                                   class="form-control @error('seo_description') is-invalid @enderror"
                                                                    placeholder="Meta description (max 255 chars)"
                                                                    value="{{ old('seo_description') }}">
                                                             @error('seo_description')
@@ -418,7 +474,8 @@
                                             <button class="btn btn-primary px-4" type="submit">
                                                 <i class="fas fa-save me-1"></i> Create Listing
                                             </button>
-                                            <a href="{{ route('user.listings.index') }}" class="btn btn-outline-secondary px-4">
+                                            <a href="{{ route('user.listings.index') }}"
+                                               class="btn btn-outline-secondary px-4">
                                                 <i class="fas fa-times me-1"></i> Cancel
                                             </a>
                                         </div>

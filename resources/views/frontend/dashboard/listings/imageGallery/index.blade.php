@@ -28,15 +28,32 @@
                                                     </h5>
                                                 </div>
                                                 <div class="card-body">
-                                                    <form
-                                                        action="{{ route('user.listings.gallery.store', $listing->id) }}"
-                                                        method="POST" enctype="multipart/form-data">
+
+                                                    <!-- Error Message -->
+                                                    @if ($errors->has('images'))
+                                                        <div class="alert alert-danger d-flex align-items-start" role="alert">
+                                                            <i class="fas fa-exclamation-circle me-2 mt-1"></i>
+                                                            <div>{{ $errors->first('images') }}</div>
+                                                        </div>
+                                                    @endif
+
+                                                    <form action="{{ route('user.listings.gallery.store', $listing->id) }}"
+                                                          method="POST" enctype="multipart/form-data">
                                                         @csrf
 
                                                         <div class="mb-3">
-                                                            <label for="images" class="form-label">
-                                                                Images <span class="text-muted"><code>(Multi Image
-                                                                        Supported)</code></span>
+                                                            <label for="images" class="form-label"> Images
+                                                                <span class="text-muted">
+                                                                    <code>(Multi ImageSupported) Your Limit =
+
+                                                                        @if($subscription->package->number_of_photos === -1)
+                                                                            Unlimited
+
+                                                                        @else
+                                                                            {{ $subscription->package->number_of_photos }}
+                                                                        @endif
+                                                                    </code>
+                                                                </span>
                                                             </label>
                                                             <input type="file"
                                                                    class="form-control @error('images.*') is-invalid @enderror"
@@ -58,7 +75,7 @@
                                         </div>
                                     </div>
 
-                                    {{-- Images Grid--}}
+                                    <!-- Images Grid -->
                                     <div class="row">
                                         <div class="col-12">
                                             <h5 class="mb-3">

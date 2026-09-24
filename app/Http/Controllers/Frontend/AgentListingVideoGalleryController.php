@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Listing;
 use App\Models\ListingVideoGallery;
+use App\Models\Subscription;
+use App\Rules\MaxVideos;
 use Illuminate\Http\Request;
 
 class AgentListingVideoGalleryController extends Controller
@@ -21,8 +23,10 @@ class AgentListingVideoGalleryController extends Controller
         if ($listing->user_id !== auth()->user()->id) {
             abort(403, 'Unauthorized action.');
         }
-
-        return view('frontend.dashboard.listings.videoGallery.index', compact('listing', 'videos', 'user'));
+        $subscription = Subscription::with(['package'])
+            ->where('user_id', $user->id)
+            ->first();
+        return view('frontend.dashboard.listings.videoGallery.index', compact('listing', 'videos', 'user', 'subscription'));
     }
 
     public function store(Listing $listing, Request $request)
@@ -33,7 +37,7 @@ class AgentListingVideoGalleryController extends Controller
             return redirect()->back()->with('error', 'Invalid YouTube video URL.');
         }
         $request->validate([
-            'video_url' => 'required|url',
+            'video_url' => ['required', 'url', new MaxVideos($listing->id)],
             'platform' => ['nullable', 'string', 'max:255']
         ]);
 

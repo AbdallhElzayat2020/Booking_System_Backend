@@ -28,13 +28,26 @@
                                                     </h5>
                                                 </div>
                                                 <div class="card-body">
-                                                    <form action="{{ route('user.listings.videos-gallery.store', $listing->id) }}"
-                                                          method="POST">
+                                                    <!-- Error Message -->
+                                                    @if ($errors->has('video_url'))
+                                                        <div class="alert alert-danger d-flex align-items-start" role="alert">
+                                                            <i class="fas fa-exclamation-circle me-2 mt-1"></i>
+                                                            <div>{{ $errors->first('video_url') }}</div>
+                                                        </div>
+                                                    @endif
+                                                    <form action="{{ route('user.listings.videos-gallery.store', $listing->id) }}" method="POST">
                                                         @csrf
 
                                                         <div class="mb-3">
                                                             <label for="video_url" class="form-label">
                                                                 YouTube Video URL <span class="text-danger">*</span>
+                                                                <code>Your subscription
+                                                                    @if($subscription->package->number_of_videos === -1)
+                                                                        Unlimited
+                                                                    @else
+                                                                        {{ $subscription->package->number_of_videos }}
+                                                                    @endif
+                                                                    videos.</code>
                                                             </label>
                                                             <textarea name="video_url"
                                                                       class="form-control @error('video_url') is-invalid @enderror"

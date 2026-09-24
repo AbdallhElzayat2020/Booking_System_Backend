@@ -14,104 +14,53 @@
                 <div class="col-12 text-center">
                     <div class="wsus__location_filter">
                         <button class="active" data-filter="*">All City</button>
-                        <button data-filter=".newyork">New York</button>
-                        <button data-filter=".london">London</button>
-                        <button data-filter=".parish">Paris</button>
-                        <button data-filter=".hongkong">HongKong</button>
-                        <button data-filter=".moscow">Moscow</button>
-                        <button data-filter=".tokyo">Tokyo</button>
+                        @foreach($featuredLocation as $location)
+                            <button data-filter=".{{$location->slug}}">
+                                {{$location->title}}
+                            </button>
+                        @endforeach
+
                     </div>
                 </div>
             </div>
             <div class="row grid">
-                <div class="col-xl-3 col-sm-6 col-lg-4 newyork hongkong tokyo">
-                    <a href="#" class="wsus__single_location">
-                        <div class="img">
-                            <img src="../../../../public/assets/client/images/location_1.jpg" alt="location" class="img-fluid w-100">
+                @foreach($featuredLocation as $location)
+
+                    @foreach($location->listings->take(8) as $listing)
+
+                        <div class="col-xl-3 col-sm-6 col-lg-4 {{$location->slug}}">
+                            <div class="wsus__featured_single">
+                                <a href="{{ route('listing-details', $listing->slug) }}">
+                                    <div class="wsus__featured_single_img">
+                                        <img src="{{asset('listings/'.$listing->thumbnail_image)}}" alt="images" class="img-fluid w-100">
+                                        <a href="#" class="love"><i class="fas fa-heart"></i></a>
+                                        <a href="#" class="small_text">
+                                            {{$listing->category->title}}
+                                        </a>
+                                    </div>
+                                </a>
+                                <div class="wsus__featured_single_text">
+                                    <p class="list_rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                        <span>(5 review)</span>
+                                    </p>
+                                    <a href="#">{{truncate($listing->title, 30)}}</a>
+                                    <p class="address">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        {{$location->title}}
+                                    </p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="wsus__location_text">
-                            <p>new york</p>
-                            <span>2 listing</span>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-xl-3 col-sm-6 col-lg-4 london parish moscow">
-                    <a href="#" class="wsus__single_location">
-                        <div class="img">
-                            <img src="../../../../public/assets/client/images/location_2.jpg" alt="location" class="img-fluid w-100">
-                        </div>
-                        <div class="wsus__location_text">
-                            <p>thailand</p>
-                            <span>10 listing</span>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-xl-3 col-sm-6 col-lg-4 newyork hongkong tokyo">
-                    <a href="#" class="wsus__single_location">
-                        <div class="img">
-                            <img src="../../../../public/assets/client/images/location_3.jpg" alt="location" class="img-fluid w-100">
-                        </div>
-                        <div class="wsus__location_text">
-                            <p>parish</p>
-                            <span>31 listing</span>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-xl-3 col-sm-6 col-lg-4 london parish moscow">
-                    <a href="#" class="wsus__single_location">
-                        <div class="img">
-                            <img src="../../../../public/assets/client/images/location_7.jpg" alt="location" class="img-fluid w-100">
-                        </div>
-                        <div class="wsus__location_text">
-                            <p>singapore</p>
-                            <span>28 listing</span>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-xl-3 col-sm-6 col-lg-4 london hongkong moscow">
-                    <a href="#" class="wsus__single_location">
-                        <div class="img">
-                            <img src="../../../../public/assets/client/images/location_4.jpg" alt="location" class="img-fluid w-100">
-                        </div>
-                        <div class="wsus__location_text">
-                            <p>japan</p>
-                            <span>25 listing</span>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-xl-3 col-sm-6 col-lg-4 newyork parish tokyo">
-                    <a href="#" class="wsus__single_location">
-                        <div class="img">
-                            <img src="../../../../public/assets/client/images/location_5.jpg" alt="location" class="img-fluid w-100">
-                        </div>
-                        <div class="wsus__location_text">
-                            <p>korea</p>
-                            <span>15 listing</span>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-xl-3 col-sm-6 col-lg-4 london parish moscow">
-                    <a href="#" class="wsus__single_location">
-                        <div class="img">
-                            <img src="../../../../public/assets/client/images/location_6.jpg" alt="location" class="img-fluid w-100">
-                        </div>
-                        <div class="wsus__location_text">
-                            <p>singapore</p>
-                            <span>28 listing</span>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-xl-3 col-sm-6 col-lg-4 london parish moscow">
-                    <a href="#" class="wsus__single_location">
-                        <div class="img">
-                            <img src="../../../../public/assets/client/images/location_8.jpg" alt="location" class="img-fluid w-100">
-                        </div>
-                        <div class="wsus__location_text">
-                            <p>singapore</p>
-                            <span>28 listing</span>
-                        </div>
-                    </a>
-                </div>
+
+                    @endforeach
+
+                @endforeach
+
             </div>
         </div>
     </div>

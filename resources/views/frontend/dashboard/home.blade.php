@@ -49,43 +49,81 @@
                                                 <tbody>
                                                 <tr>
                                                     <td class="active_left">Package name</td>
-                                                    <td class="package_right">Free</td>
+                                                    <td class="package_right">
+                                                        {{$subscription->package->name}}
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td class="active_left">Price</td>
-                                                    <td class="package_right">$50</td>
+                                                    <td class="package_right">
+                                                        {{currencyPosition($subscription->package->price)}}
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td class="active_left">Purchase Date</td>
-                                                    <td class="package_right">15 October, 2021</td>
+                                                    <td class="package_right">
+                                                        {{date('d F Y', strtotime($subscription->created_at))}}
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td class="active_left">Expired Date</td>
-                                                    <td class="package_right">14 November, 2021</td>
+                                                    <td class="package_right">
+                                                        @if($subscription->expire_date == null)
+                                                            Forever
+                                                        @else
+                                                            {{date('d F Y', strtotime($subscription->expire_date))}}
+                                                        @endif
+                                                    </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="active_left">Package name</td>
-                                                    <td class="package_right">Free</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="active_left">Maximum Listing </td>
-                                                    <td class="package_right">10</td>
+                                                    <td class="active_left">Maximum Listing</td>
+                                                    <td class="package_right">
+                                                        @if($subscription->package->number_of_listings == -1)
+                                                            Unlimited
+                                                        @else
+                                                            {{$subscription->package->number_of_listings}}
+                                                        @endif
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td class="active_left">Maximum Aminities</td>
-                                                    <td class="package_right">5</td>
+                                                    <td class="package_right">
+                                                        @if($subscription->package->number_of_amenities == -1)
+                                                            Unlimited
+                                                        @else
+                                                            {{$subscription->package->number_of_amenities}}
+                                                        @endif
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td class="active_left">Maximum Photo</td>
-                                                    <td class="package_right">5</td>
+                                                    <td class="package_right">
+                                                        @if($subscription->package->number_of_photos == -1)
+                                                            Unlimited
+                                                        @else
+                                                            {{$subscription->package->number_of_photos}}
+                                                        @endif
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td class="active_left">Maximum Video</td>
-                                                    <td class="package_right">10</td>
+                                                    <td class="package_right">
+                                                        @if($subscription->package->number_of_videos == -1)
+                                                            Unlimited
+                                                        @else
+                                                            {{$subscription->package->number_of_videos}}
+                                                        @endif
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td class="active_left">Featured Listing Available</td>
-                                                    <td class="package_right">no</td>
+                                                    <td class="package_right">
+                                                        @if($subscription->package->number_of_featured_listings == -1)
+                                                            Unlimited
+                                                        @else
+                                                            {{$subscription->package->number_of_featured_listings}}
+                                                        @endif
+                                                    </td>
                                                 </tr>
                                                 </tbody>
                                             </table>

@@ -15,6 +15,54 @@
                                     <h4 class="mb-0 fs-5 text-white"><i class="fas fa-edit me-2"></i>Edit Listing</h4>
                                 </div>
                                 <div class="card-body">
+
+
+                                    {{-- =====  Listings ===== --}}
+                                    @if ($errors->has('listing'))
+                                        <div class="alert alert-danger d-flex align-items-center" role="alert">
+
+                                            <ul>
+                                                <li>
+                                                    <i class="fas fa-exclamation-circle me-2"></i>{{ $errors->first('listing') }}
+                                                </li>
+                                                <li>
+                                                    <i class="fas fa-exclamation-circle me-2"></i>{{ $errors->first('amenities') }}
+                                                </li>
+                                                <li>
+                                                    <i class="fas fa-exclamation-circle me-2"></i>{{ $errors->first('is_featured') }}
+                                                </li>
+                                            </ul>
+                                            <div></div>
+                                        </div>
+                                    @endif
+
+                                    @if ($errors->has('is_featured'))
+                                        <div class="alert alert-danger d-flex align-items-start" role="alert">
+                                            <i class="fas fa-exclamation-circle me-2 mt-1"></i>
+                                            <div>{{ $errors->first('is_featured') }}</div>
+                                        </div>
+                                    @endif
+
+                                    {{-- ===== success messages ===== --}}
+                                    @if (session('success'))
+                                        <div class="alert alert-success d-flex align-items-center" role="alert">
+                                            <i class="fas fa-check-circle me-2"></i>
+                                            <div>{{ session('success') }}</div>
+                                        </div>
+                                    @endif
+
+                                    {{-- ===== General Error Messages ===== --}}
+                                    @if ($errors->any() && !$errors->has('listing'))
+                                        <div class="alert alert-danger">
+                                            <ul class="mb-0 ps-3">
+                                                @foreach ($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
+
+
                                     <form action="{{ route('user.listings.update', $listing->id) }}" method="POST" enctype="multipart/form-data">
                                         @csrf
                                         @method('PUT')
@@ -387,22 +435,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-6">
-                                                <div class="mb-3">
-                                                    <label for="is_verified" class="form-label">Verified <span class="text-danger">*</span></label>
-                                                    <select name="is_verified"
-                                                            class="form-select @error('is_verified') is-invalid @enderror"
-                                                            id="is_verified">
-                                                        <option value="no" {{ old('is_verified', $listing->is_verified) == 'no' ? 'selected' : '' }}>No</option>
-                                                        <option value="yes" {{ old('is_verified', $listing->is_verified) == 'yes' ? 'selected' : '' }}>Yes</option>
-                                                    </select>
-                                                    @error('is_verified')
-                                                    <div class="invalid-feedback">{{ $message }}</div>
-                                                    @enderror
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6">
+                                            <div class="col-md-12">
                                                 <div class="mb-3">
                                                     <label for="is_featured" class="form-label">Featured <span class="text-danger">*</span></label>
                                                     <select name="is_featured"
@@ -444,7 +477,7 @@
                                                            class="form-control @error('seo_description') is-invalid @enderror"
                                                            id="seo_description"
                                                            placeholder="Meta description (max 255 chars)"
-                                                           value="{{ old('seo_description', $listing->seo_description) }}">
+                                                           value="{!! old('seo_description', $listing->seo_description) !!}">
                                                     @error('seo_description')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
