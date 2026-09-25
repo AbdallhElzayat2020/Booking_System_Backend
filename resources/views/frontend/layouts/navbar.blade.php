@@ -75,7 +75,7 @@
                     <a class="nav-link" href="blog.html">blog</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="contact.html">contact us</a>
+                    <a class="nav-link" href="{{ route('contact.index') }}">contact us</a>
                 </li>
             </ul>
             <a class="user_btn" href="dsahboard.html"><i class="far fa-plus"></i> add listing</a>

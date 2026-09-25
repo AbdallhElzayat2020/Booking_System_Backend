@@ -1,7 +1,9 @@
 <?php
 
-use App\Http\Controllers\Admin\{AmenityController,
+use App\Http\Controllers\Admin\{
+    AmenityController,
     CategoryController,
+    ContactController,
     HeroController,
     ListingController,
     ListingImageGalleryController,
@@ -17,7 +19,8 @@ use App\Http\Controllers\Admin\{AmenityController,
     ProfileController,
     HomeController,
     AuthController,
-    SettingController};
+    SettingController
+};
 
 use Illuminate\Support\Facades\Route;
 
@@ -138,6 +141,10 @@ Route::group(['prefix' => 'admin',
 
         Route::resource('orders', OrderController::class);
 
+        Route::get('contacts', [ContactController::class, 'index'])->name('contacts.index');
+        Route::get('contacts/{contact}', [ContactController::class, 'show'])->name('contacts.show');
+        Route::patch('contacts/{contact}/toggle-read', [ContactController::class, 'toggleRead'])->name('contacts.toggle-read');
+        Route::delete('contacts/{contact}', [ContactController::class, 'destroy'])->name('contacts.destroy');
 
         /* Settings Routes */
         Route::get('settings', [SettingController::class, 'index'])->name('settings.index');

@@ -63,11 +63,15 @@
                 </ul>
             </li>
 
+            {{--  Contacts Routes--}}
+            <li class="{{setSidebarActive(['admin.contacts.*'])}}"><a class="nav-link" href="{{ route('admin.contacts.index') }}"><i class="far fa-square"></i> <span>Contacts</span></a></li>
+
             {{--  Order Routes--}}
-            <li><a class="nav-link" href="{{ route('admin.orders.index') }}"><i class="far fa-square"></i> <span>Orders</span></a></li>
+            <li class="{{setSidebarActive(['admin.orders.*'])}}"><a class="nav-link" href="{{ route('admin.orders.index') }}"><i class="far fa-square"></i> <span>Orders</span></a></li>
 
 
-            <li><a class="nav-link" href="{{ route('admin.settings.index') }}"><i class="far fa-square"></i> <span>Settings</span></a></li>
+
+            <li class="{{setSidebarActive(['admin.settings.*'])}}"><a class="nav-link" href="{{ route('admin.settings.index') }}"><i class="far fa-square"></i> <span>Settings</span></a></li>
 
         </ul>
     </aside>
