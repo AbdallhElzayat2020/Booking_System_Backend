@@ -35,5 +35,8 @@ class UserSeeder extends Seeder
                 'created_at' => now(),
             ]
         );
+
+        $user = User::whereEmail('admin@gmail.com')->first();
+        $user->assignRole('Super Admin');
     }
 }

@@ -1,7 +1,6 @@
 <?php
 
-use App\Http\Controllers\Admin\{
-    AmenityController,
+use App\Http\Controllers\Admin\{AmenityController,
     CategoryController,
     ContactController,
     HeroController,
@@ -19,8 +18,8 @@ use App\Http\Controllers\Admin\{
     ProfileController,
     HomeController,
     AuthController,
-    SettingController
-};
+    RolePermissionController,
+    SettingController};
 
 use Illuminate\Support\Facades\Route;
 
@@ -138,7 +137,6 @@ Route::group(['prefix' => 'admin',
         Route::resource('package-features', PackageFeatureController::class);
 
         /* Orders Routes */
-
         Route::resource('orders', OrderController::class);
 
         Route::get('contacts', [ContactController::class, 'index'])->name('contacts.index');
@@ -157,6 +155,10 @@ Route::group(['prefix' => 'admin',
 
         /* Stripe Settings Routes */
         Route::post('stripe-settings', [PaymentSettingController::class, 'stripeSetting'])->name('stripe-settings.update');
+
+        /* Roles  Routes */
+
+        Route::resource('role', RolePermissionController::class);
 
     });
 

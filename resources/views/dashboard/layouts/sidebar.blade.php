@@ -73,6 +73,24 @@
 
             <li class="{{setSidebarActive(['admin.settings.*'])}}"><a class="nav-link" href="{{ route('admin.settings.index') }}"><i class="far fa-square"></i> <span>Settings</span></a></li>
 
+
+
+            {{--  Access Management Routes  --}}
+            <li class="menu-header">Access Management</li>
+            <li class="dropdown {{setSidebarActive(['admin.roles.*'])}}">
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
+                    <i class="fas fa-columns"></i> <span>Roles and Permissions</span>
+                </a>
+                <ul class="dropdown-menu">
+
+                    {{-- Role  --}}
+                    <li class="{{setSidebarActive(['admin.roles.*'])}}">
+                        <a class="nav-link " href="{{ route('admin.role.index') }}">Roles</a>
+                    </li>
+
+
+                </ul>
+            </li>
         </ul>
     </aside>
 </div>
