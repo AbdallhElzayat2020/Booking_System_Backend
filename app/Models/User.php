@@ -16,6 +16,18 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable , HasRoles;
 
     /**
+     * Perform pre-authorization checks on the model.
+     */
+    public function before(User $user, string $ability): ?bool
+    {
+        if ($user->hasRole('Super Admin')) {
+            return true;
+        }
+
+        return null; // see the note above in Gate::before about why null must be returned here.
+    }
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>

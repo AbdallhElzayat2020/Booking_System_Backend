@@ -12,6 +12,15 @@ use Illuminate\Support\Str;
 
 class PackageController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware(['permission:package index'])->only('index');
+        $this->middleware(['permission:package create'])->only(['create', 'store', 'show']);
+        $this->middleware(['permission:package update'])->only(['edit', 'update']);
+        $this->middleware(['permission:package delete'])->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      */

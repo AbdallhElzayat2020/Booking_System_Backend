@@ -70,14 +70,12 @@
             <li class="{{setSidebarActive(['admin.orders.*'])}}"><a class="nav-link" href="{{ route('admin.orders.index') }}"><i class="far fa-square"></i> <span>Orders</span></a></li>
 
 
-
             <li class="{{setSidebarActive(['admin.settings.*'])}}"><a class="nav-link" href="{{ route('admin.settings.index') }}"><i class="far fa-square"></i> <span>Settings</span></a></li>
-
 
 
             {{--  Access Management Routes  --}}
             <li class="menu-header">Access Management</li>
-            <li class="dropdown {{setSidebarActive(['admin.roles.*'])}}">
+            <li class="dropdown {{setSidebarActive(['admin.roles.*','admin.role-users.*'])}}">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
                     <i class="fas fa-columns"></i> <span>Roles and Permissions</span>
                 </a>
@@ -86,6 +84,11 @@
                     {{-- Role  --}}
                     <li class="{{setSidebarActive(['admin.roles.*'])}}">
                         <a class="nav-link " href="{{ route('admin.role.index') }}">Roles</a>
+                    </li>
+
+                    {{-- Role User  --}}
+                    <li class="{{setSidebarActive(['admin.role-users.*'])}}">
+                        <a class="nav-link " href="{{ route('admin.role-users.index') }}">Role Users</a>
                     </li>
 
 

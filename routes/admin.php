@@ -157,8 +157,10 @@ Route::group(['prefix' => 'admin',
         Route::post('stripe-settings', [PaymentSettingController::class, 'stripeSetting'])->name('stripe-settings.update');
 
         /* Roles  Routes */
-
         Route::resource('role', RolePermissionController::class);
+
+        /* Role Users  Routes */
+        Route::resource('role-users', \App\Http\Controllers\Admin\RoleUserController::class);
 
     });
 

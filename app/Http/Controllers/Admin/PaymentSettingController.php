@@ -21,6 +21,13 @@ class PaymentSettingController extends Controller
      * paypal_app_key
      *
      * */
+
+
+    public function __construct()
+    {
+        $this->middleware(['permission:setting index'])->only('index', 'stripeSetting', 'paypalSetting');
+    }
+
     public function index()
     {
         return view('dashboard.PaymentSetting.index');

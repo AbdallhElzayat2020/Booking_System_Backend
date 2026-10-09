@@ -10,6 +10,12 @@ use Illuminate\Http\Request;
 
 class SettingController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware(['permission:setting index'])->only('index', 'update');
+    }
+
     public function index()
     {
         return view('dashboard.setting.index');

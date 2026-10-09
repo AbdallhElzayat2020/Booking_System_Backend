@@ -9,6 +9,13 @@ use Illuminate\Http\Request;
 
 class PendingListingController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware(['permission:pending listing'])->only('index');
+        $this->middleware(['permission:pending listing'])->only(['update']);
+    }
+
     public function index(PendingListingDataTable $dataTable)
     {
         return $dataTable->render('dashboard.pending-listing.index');

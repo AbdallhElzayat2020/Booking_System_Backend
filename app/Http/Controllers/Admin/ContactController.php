@@ -10,6 +10,13 @@ use Illuminate\View\View;
 
 class ContactController extends Controller
 {
+
+
+    public function __construct()
+    {
+        $this->middleware(['permission:message index'])->only('index', 'show', 'destroy', 'toggleRead');
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -59,13 +66,6 @@ class ContactController extends Controller
         return view('dashboard.contacts.show', compact('contact'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
 
     public function toggleRead(Contact $contact)
     {

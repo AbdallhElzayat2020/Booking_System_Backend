@@ -20,6 +20,15 @@ class ListingController extends Controller
 {
     use FileHandler;
 
+
+    public function __construct()
+    {
+        $this->middleware(['permission:listing index'])->only('index');
+        $this->middleware(['permission:listing create'])->only(['create', 'store']);
+        $this->middleware(['permission:listing update'])->only(['edit', 'update', 'show']);
+        $this->middleware(['permission:listing delete'])->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -93,8 +102,7 @@ class ListingController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public
-    function edit(string $id)
+    public function edit(string $id)
     {
         $listing = Listing::findOrFail($id);
         $categories = Category::active()->get();
@@ -147,8 +155,7 @@ class ListingController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public
-    function destroy(string $id)
+    public function destroy(string $id)
     {
         $listing = Listing::findOrFail($id);
         $listing->delete();

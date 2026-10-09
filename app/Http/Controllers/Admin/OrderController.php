@@ -9,6 +9,13 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware(['permission:order index'])->only(['index', 'show', 'update']);
+        $this->middleware(['permission:order delete'])->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      */

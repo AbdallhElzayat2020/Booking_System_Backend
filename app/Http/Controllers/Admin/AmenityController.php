@@ -12,6 +12,15 @@ use Illuminate\Support\Str;
 
 class AmenityController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware(['permission:listing index'])->only('index');
+        $this->middleware(['permission:listing create'])->only(['create', 'store', 'show']);
+        $this->middleware(['permission:listing update'])->only(['edit', 'update']);
+        $this->middleware(['permission:listing delete'])->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      */
