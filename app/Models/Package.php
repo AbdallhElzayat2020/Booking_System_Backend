@@ -31,6 +31,11 @@ class Package extends Model
         return $query->where('status', 'active');
     }
 
+    public function scopeInActive(Builder $query): Builder
+    {
+        return $query->where('status', 'inactive');
+    }
+
     public function scopeShowAtHome(Builder $query): Builder
     {
         return $query->where('show_at_home', 'yes');
