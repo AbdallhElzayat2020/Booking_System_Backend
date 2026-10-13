@@ -27,7 +27,6 @@ class HomeController extends Controller
         $totalUnActivePackages = Package::inActive()->count();
         $totalOrders = Order::all()->count();
 
-
         return view('dashboard.home', [
             'totalUsers' => $totalUsers,
             'totalAdmins' => $totalAdmins,

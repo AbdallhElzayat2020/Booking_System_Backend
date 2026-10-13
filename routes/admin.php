@@ -19,7 +19,8 @@ use App\Http\Controllers\Admin\{AmenityController,
     HomeController,
     AuthController,
     RolePermissionController,
-    SettingController};
+    SettingController
+};
 
 use Illuminate\Support\Facades\Route;
 
@@ -147,6 +148,8 @@ Route::group(['prefix' => 'admin',
         /* Settings Routes */
         Route::get('settings', [SettingController::class, 'index'])->name('settings.index');
         Route::post('general-settings', [SettingController::class, 'update'])->name('settings.update');
+        Route::post('logo-settings', [SettingController::class, 'logoSettings'])->name('logo.settings.update');
+        Route::post('appearance-settings', [SettingController::class, 'appearanceSettings'])->name('appearance.settings.update');
 
         /* Payment Settings Routes */
         Route::get('payment-settings', [PaymentSettingController::class, 'index'])->name('payment-settings.index');

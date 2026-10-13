@@ -11,11 +11,23 @@
 <link rel="stylesheet" href="{{asset('assets/admin/css/components.css')}}">
 
 {{--fontaswome --}}
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
 
 {{--Bootstrap IconPicker--}}
 <link rel="stylesheet" href="{{asset('assets/admin/css/bootstrap-iconpicker.min.css')}}">
 
 {{--select2 --}}
 <link rel="stylesheet" href="{{asset('assets/admin/modules/select2/dist/css/select2.min.css')}}">
+
+{{--colorpicker--}}
+<link rel="styles|heet" href="{{asset('assets/admin/modules/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css')}}">
+
+<style>
+
+    :root {
+        --colorPrimary: {{ config('settings.site_color') }} !important;
+    }
+</style>
+
+
 @stack('css')

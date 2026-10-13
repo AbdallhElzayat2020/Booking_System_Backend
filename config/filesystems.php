@@ -86,6 +86,13 @@ return [
             'visibility' => 'public',
             'throw' => false,
         ],
+        'settings' => [
+            'driver' => 'local',
+            'root' => public_path('settings'),
+            'url' => env('APP_URL') . '/settings',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
 
 
         's3' => [

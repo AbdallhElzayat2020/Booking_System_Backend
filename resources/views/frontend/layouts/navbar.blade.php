@@ -37,7 +37,7 @@
 <nav class="navbar navbar-expand-lg main_menu">
     <div class="container">
         <a class="navbar-brand" href="{{ route('home') }}">
-            <img src="{{asset('assets/client/images/logo.png')}}" alt="DB.Card">
+            <img src="{{asset('settings/'.config('settings.logo'))}}" alt="Logo">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"

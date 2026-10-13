@@ -6,6 +6,7 @@
     <title>
         @yield('title','Booking App')
     </title>
+    <link rel="icon" type="image/x-icon" href="{{asset('settings/'.config('settings.favicon'))}}">
     @include('frontend.layouts.styles')
     <!-- <link rel="stylesheet" href="css/rtl.css"> -->
 </head>
