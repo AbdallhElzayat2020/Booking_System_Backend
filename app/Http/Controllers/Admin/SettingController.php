@@ -80,16 +80,14 @@ class SettingController extends Controller
             'site_color' => ['required', 'max:7', 'string'],
         ]);
 
-        foreach ($validatedData as $key => $value) {
-            Setting::updateOrCreate(
-                ['key' => $key],
-                ['value' => $value]
-            );
-        }
+        Setting::updateOrCreate(
+            ['key' => 'site_color'],
+            ['value' => $validatedData['site_color']]
+        );
 
 
         $settingService->clearCachedSettings();
 
-        return back()->with('success', 'Logo settings updated successfully.');
+        return back()->with('success', 'Appearance settings updated successfully.');
     }
 }

@@ -3,25 +3,20 @@
         <form action="{{ route('admin.appearance.settings.update') }}" method="POST">
             @csrf
 
-            {{-- site_color --}}
             <div class="form-group">
                 <label class="font-weight-bold">Default Site Color</label>
-                <div class="input-group colorpickerinput">
-                    <input type="text"
-                           class="form-control @error('site_color') is-invalid @enderror"
-                           value="{{ old('site_color', config('settings.site_color')) }}"
-                           name="site_color"
-                           placeholder="#0d6efd">
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                            <i class="fas fa-fill-drip"></i>
-                        </div>
-                    </div>
-                    @error('site_color')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
+                <div class="d-flex align-items-center gap-3">
+                    <input type="color"
+                        class="form-control form-control-color @error('site_color') is-invalid @enderror"
+                        value="{{ old('site_color', config('settings.site_color', '#0d6efd')) }}" name="site_color"
+                        id="siteColorPicker" style="width: 60px; height: 45px; padding: 4px; cursor: pointer;">
+                    <input type="text" class="form-control" id="siteColorText"
+                        value="{{ old('site_color', config('settings.site_color', '#0d6efd')) }}" readonly
+                        style="max-width: 150px;">
                 </div>
-                <small class="text-muted">اختر اللون الأساسي للموقع</small>
+                @error('site_color')
+                    <div class="text-danger mt-1">{{ $message }}</div>
+                @enderror
             </div>
 
             <button type="submit" class="btn btn-primary mt-3">
@@ -33,13 +28,13 @@
 
 @push('js')
     <script>
-        $(document).ready(function () {
-            if (typeof $.fn.colorpicker !== 'undefined') {
-                $(".colorpickerinput").colorpicker({
-                    format: 'hex',
-                    component: '.input-group-append',
-                });
-            }
+        document.addEventListener('DOMContentLoaded', function() {
+            const colorInput = document.getElementById('siteColorPicker');
+            const textInput = document.getElementById('siteColorText');
+
+            colorInput.addEventListener('input', function() {
+                textInput.value = this.value;
+            });
         });
     </script>
 @endpush

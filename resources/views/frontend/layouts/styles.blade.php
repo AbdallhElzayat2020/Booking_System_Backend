@@ -23,3 +23,9 @@
 
 {{--summernote cdn--}}
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote.min.css" rel="stylesheet">
+
+<style>
+    :root {
+        --colorPrimary: {{ config('settings.site_color') }} !important;
+    }
+</style>
