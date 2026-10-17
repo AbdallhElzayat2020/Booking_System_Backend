@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\Frontend\AgentListingController;
 use App\Http\Controllers\Frontend\AgentListingGalleryController;
 use App\Http\Controllers\Frontend\AgentListingScheduleController;
@@ -128,5 +129,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('stripe/cancel', [PaymentController::class, 'stripeCancel'])->name('stripe.payment.cancel');
 });
 
+
+Route::prefix('redirect')->name('socialite.')->controller(SocialiteController::class)
+    ->group(function () {
+        Route::get('/{provider}', 'login')->name('social-login');
+        Route::get('/{provider}/callback', 'callback')->name('social-login-callback');
+    });
 
 require __DIR__ . '/auth.php';

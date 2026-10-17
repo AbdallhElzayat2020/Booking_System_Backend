@@ -88,6 +88,27 @@
                                     </div>
                                 </div>
 
+                                {{-- Divider --}}
+                                <div class="col-xl-12 my-3 text-center">
+                                    <span class="text-muted position-relative px-2 bg-white" style="z-index: 1;">or sign in with</span>
+                                    <hr class="mt-n2" style="margin-top: -11px;">
+                                </div>
+
+                                {{-- Social Login Buttons --}}
+                                <div class="col-xl-12">
+                                    <div class="d-flex flex-column gap-2 mb-3">
+                                        {{-- Google Button --}}
+                                        <a href="{{route('socialite.social-login',['provider' => 'google'])}}" class="btn btn-outline-danger w-100 d-flex align-items-center justify-content-center py-2" style="font-weight: 500;">
+                                            <i class="fab fa-google me-2"></i> Continue with Google
+                                        </a>
+
+                                        {{-- GitHub Button --}}
+                                        <a href="{{route('socialite.social-login',['provider' => 'github'])}}" class="btn btn-dark w-100 d-flex align-items-center justify-content-center py-2" style="font-weight: 500;">
+                                            <i class="fab fa-github me-2"></i> Continue with GitHub
+                                        </a>
+                                    </div>
+                                </div>
+
                                 <p class="create_account">Don’t have an account ? <a href="{{ route('register') }}">Create Account</a></p>
 
                             </div>

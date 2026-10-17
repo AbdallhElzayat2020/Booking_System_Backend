@@ -36,7 +36,7 @@
                                         <p>Pending listing</p>
                                     </div>
                                 </div>
-                                @if($subscription->package)
+                                @if($subscription?->package)
                                     <div class="col-xl-12">
                                         <div class="active_package">
                                             <h4>Active Package</h4>
@@ -58,7 +58,7 @@
                                                     <tr>
                                                         <td class="active_left">Purchase Date</td>
                                                         <td class="package_right">
-                                                            {{date('d F Y', strtotime($subscription->created_at))}}
+                                                            {{date('d F Y', strtotime($subscription?->created_at))}}
                                                         </td>
                                                     </tr>
                                                     <tr>

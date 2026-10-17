@@ -13,7 +13,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable , HasRoles;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
     /**
      * Perform pre-authorization checks on the model.
@@ -46,6 +46,9 @@ class User extends Authenticatable
         'whatsapp',
         'linkedin_link',
         'instagram_link',
+        'provider_name',
+        'provider_id',
+        'provider_token',
         'about',
         'banner'
     ];
